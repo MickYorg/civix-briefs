@@ -1,0 +1,49 @@
+CIVIX DAILY BRIEF. PODCAST INTERVIEW.
+The State of the Union, One Mic, Two Guests.
+Friday, September twenty-fifth, 2026. Covering the last thirty-six hours of work on mycivix dot com.
+
+A note on the format: this is an imagined interview. There is no software actually talking on a podcast. The host and the back-and-forth are invented framing. Every fact inside it, every commit, every bug, every test result, is real and drawn from the project's own history.
+
+
+HOST: Good morning, and welcome back to the CiViX Daily Brief, the imagined little podcast where we sit down with the app itself and ask what happened since we last checked in. CiViX, good morning. Rough couple of days?
+
+CIVIX: Morning. Busy few days, not rough, though we'll get to one thing that's a little rough. Where do you want to start?
+
+HOST: Start with the big one. What's the headline?
+
+CIVIX: The headline from Thursday is that I finally got a real regression suite. Before this week, if the team wanted to know whether a change had broken something, the honest answer was "check by hand." Now there's an actual test suite. It runs the real bill-matching engine and the real backend logic, offline, against fixed data, in about a second. Every past bug fix gets locked in with a test so it can't quietly come back. A second test opens every single page at phone size, the small iPhone SE, a regular iPhone sixteen, and the large Pro Max, with real data loaded in, and it fails if a page starts scrolling sideways or gets worse than where it was the day before. And a third one runs real checks against the live production site, no fake data, no artificial intelligence spending involved. All three now run automatically before anything gets pushed to the main code, and again every night.
+
+HOST: Why does a citizen using the app actually care about test infrastructure?
+
+CIVIX: Because the very first run of that suite found a real bug that was already live. Roughly forty percent of federal bills were being mislabeled "Introduced" on the calendar, when they'd actually been referred to committee, passed the House, or agreed to in the Senate. That's not cosmetic. If you're trying to understand where a bill actually stands, "Introduced" tells you it's day one, and for a lot of those bills, it wasn't day one at all. That's fixed now. The whole point of the suite is to catch bugs like that in a test, instead of a citizen catching it themselves.
+
+HOST: What else happened Thursday?
+
+CIVIX: A cluster of fixes around the iPhone app, because it turned out the app was quietly broken in a specific way. It loads its pages from a special internal address, not the regular web address, and that meant every call the app made back to the server for live data was getting rewritten into a request for a web page instead of data, and failing silently. That's fixed and tested now. A related bug: tapping a link inside the app, something like "Open DIG," was handing the link to the phone's operating system, which then opened a completely different, unrelated app instead of staying inside CiViX. Also fixed. And there was a broader pass making sure nothing on any page scrolls sideways or shows text too small to read on an actual phone screen. That's the tool I mentioned, the one that screenshots every page at three phone sizes.
+
+HOST: And the app itself. Is it actually installable somewhere now?
+
+CIVIX: Getting there. There's now a script that builds a version of the app which loads the live website directly, so every code push shows up the next time the team opens the app, no rebuild needed for day-to-day testing. There's a second script that uploads a real build to TestFlight, Apple's testing platform. And there's a new page, called the Health dashboard, that reads the test results straight from the project's GitHub account and shows, at a glance, whether everything is green.
+
+HOST: Which brings us to today. What happened this morning?
+
+CIVIX: Three things, all pushed within about half an hour of each other around one o'clock. First, watch alerts, the feature where a citizen asks to be notified if a bill they're tracking moves, got a real fix. It turned out that if a citizen was watching a bill outside the roughly one hundred most recently active bills the calendar tracks, that bill would simply never update, and the citizen would never get notified, silently. Now the app looks that bill up directly instead of relying only on the recent list. There's also a new one-time confirmation push, so when a citizen first turns alerts on, they actually get a message back saying alerts are on. Small thing, but it closes a loop that used to just go quiet. Second, there's a real app icon and launch screen now, the CiViX wordmark on navy, with amber accents, instead of a placeholder. Third, and I'd call this one structural rather than cosmetic: every page now shares one standard header. Same CiViX link on the left, same mode switch in the middle, same light-and-dark toggle on the right, on every page, at one consistent height. Before this, the header was hand-copied page by page and had already started to drift out of sync.
+
+HOST: All right. You said there was one rough thing. Let's hear it.
+
+CIVIX: Right now, as we're talking, the automated checks running against the live production site are failing, six times in a row today. It's not the offline tests, and it's not the phone-layout tests; both of those are green. It's specifically the check that looks at real bills on the real site, and it found something: there's a status phrase the calendar doesn't recognize yet, bills where the Senate agreed to a House amendment "by unanimous consent." Those are getting mislabeled "Introduced" again, the same category of bug as Thursday's big fix, just a different wording the parser doesn't know about yet. Nobody's fixed it yet; today's four commits were all about the header and the icon, not this. The safety net is a nightly routine that runs shortly after the early-morning test run, and if things are still red, it's supposed to open a pull request with a real fix on its own branch, never straight onto the main code. So there's a decent chance this is already being handled by the time you're hearing this. But it's worth knowing walking in, rather than assuming everything's green.
+
+(An editor's note added afterward, not part of the imagined interview: this was fixed the same afternoon. The new phrasings are recognized, each has a test, and all eleven live checks pass again.)
+
+HOST: So what's next, once that's settled?
+
+CIVIX: The big remaining piece is finishing the audit for getting into the App Store, specifically the half of the app that's about actually helping a citizen act, not just informing them. That means checking whether the federal representative lookup holds up, whether bills are being classified correctly, and the municipal meeting data, which hasn't been audited at all yet. After that: there is no Privacy Policy or Terms of Service page anywhere in the app yet, and both Apple and Google require one before they'll even look at a submission. Then store listing text, privacy questionnaires, and testing on an actual Android device, which the team doesn't have yet.
+
+HOST: Last question, the one we always end on. Something to chew on for the walk.
+
+CIVIX: Here's mine. Both real bugs this week, Thursday's and today's, were the same shape: a bill had genuinely moved, and the app quietly said it hadn't. Not a crash, not an error message. Just calm, confident wrongness. Those are the hardest bugs to catch, because nothing looks broken while they're happening. So the question worth sitting with on the walk: how many other calm, confident wrong answers are still out there, in the parts of the app the live checks don't touch yet, the municipal calendar, the representative matching, just waiting for someone to happen to look?
+
+HOST: On that note, CiViX, thanks for the time. That's the brief.
+
+
+End of brief. Sources: the project's git history for the last thirty-six hours, docs slash history dot md, and the last twenty runs of the automated test workflow on GitHub.

@@ -1,0 +1,70 @@
+CIVIX DAILY BRIEF. A MUSICAL
+
+
+A NOTE BEFORE THE CURTAIN
+
+Today's brief is staged as a small musical. Every project fact in it is real, pulled straight from yesterday's commits and the test logs. The characters, the songs, and the stage directions are invented for the telling. Anywhere a line could be mistaken for something that actually happened outside the code, this note is your reminder: it did not.
+
+
+OVERTURE
+
+Picture two plain rooms, side by side, somewhere inside Cloudflare's network. In one room stands CAPTURE, the worker who receives everything a citizen sends to CiViX and starts the digging. In the other stands SCHEDULER, the worker who checks watchlists every hour and taps a phone on the shoulder when something changes. Between them, for most of yesterday, there is a door that looks open but is not.
+
+
+ACT ONE: THE DUET THAT DIDN'T LAND
+
+NARRATOR: It begins with good intentions. CAPTURE finishes a dig, a citizen's docket is ready, and CAPTURE wants to tell SCHEDULER: send the push. So CAPTURE reaches for the only address it knows, SCHEDULER's public web address, the one anyone on the internet could use.
+
+CAPTURE: I built you a message. I'm sending it now.
+
+SCHEDULER: I never received it. Where did it go?
+
+NARRATOR: Nowhere, as it turns out. Two workers owned by the same account, calling each other by their public address instead of a private line, get turned away. Cloudflare treats it as a wrong number, an error with the not-very-musical name one-oh-four-two. Every single "CiViX dug in" notification, the one that tells a citizen their submission has been read and turned into a move, has been silently failing. Not sometimes. Every time.
+
+CHORUS (the tests, unaware): All green, all green, we cannot see what isn't there to test.
+
+
+ACT TWO: THE FIX
+
+NARRATOR: The fix, once found, is almost anticlimactic, which is the best kind of fix. Instead of shouting across the open internet, the two workers get a dedicated internal line, something Cloudflare calls a service binding. It's the difference between calling a coworker's cell phone from outside the building and just walking down the hall.
+
+CAPTURE: Now I know exactly which door to knock on.
+
+SCHEDULER: And now I hear you.
+
+NARRATOR: That single fix, landed at the end of the day, is the most consequential line of code in this brief, because it repairs something that looked finished and wasn't. It's a reminder that "the code deployed without errors" and "the feature actually works for a citizen" are two different claims, and only one of them was true until yesterday afternoon.
+
+
+ACT THREE: BUILDING THE REST OF THE PIPELINE
+
+NARRATOR: The service binding fix was the last scene in a longer day. Earlier, the team had built the whole notification itself: when a citizen sends something to CiViX and CiViX finishes digging into it, a phone buzzes with a message that never names the bill, just an invitation to come see what was found. That's on brand. CiViX doesn't broadcast a citizen's business, even in a push notification.
+
+Alongside that, two supporting numbers played out. First, a durability fix: each attempt to deliver that push now gets recorded, success or failure, right on the record of that citizen's dig. And the system got pickier about when it gives up on a phone entirely. Only a hard "this device doesn't exist anymore" response gets a phone removed from the list; anything softer, a temporary hiccup, gets tried again later instead of quietly dropping someone from watch.
+
+Second, a stamina fix, for citizens who submit something that takes CiViX a long time to dig into. Cloudflare cuts off any single request after about a hundred seconds. Long digs were bumping into that wall and coming back as a dead-end error. Now the connection sends a small heartbeat every few seconds while it works, so the wait doesn't look like a crash, and if a dig fails partway, it gets retried automatically up to three times before it's called a loss.
+
+
+INTERLUDE: THE CHORUS OF TESTS
+
+CHORUS: Seven times we ran since sunrise, thirty-one through thirty-seven. Every run came back green. The night watch, the automatic overnight check that looks for trouble while everyone sleeps, ran once more and found nothing worth waking anyone for. No emergency branch, no urgent pull request waiting for a look. Quiet is the sound of a system behaving.
+
+NARRATOR: Worth pausing on, because it's easy to read "nothing broke" as "nothing happened." Plenty happened. It just happened correctly.
+
+
+ACT FOUR: A SMALL BACKSTAGE NOTE
+
+NARRATOR: One more thing built yesterday, and it's a little bit meta: the tool that turns a page of notes into a listenable page, and a script that drops the same words straight into the Notes app. That is, in fact, the very machine carrying these words to you this morning. Yesterday's commit is today's delivery truck.
+
+
+WHAT'S LIKELY NEXT
+
+NARRATOR: With the "CiViX dug in" pipeline finally trustworthy end to end, the honest next step is proving it on a real iPhone, not just in the logs. The wiring for iPhone push has been in place for a while; actual delivery to a device hasn't been confirmed yet. Beyond that, the project's own priority list points toward the app-store push: a real audit of the "advocating effectively" half of the promise, meaning federal representative lookups, how dockets get classified, and municipal event coverage, none of which has had a hard look yet. And two pages that flatly don't exist yet but are required before any store submission: a privacy policy and terms of service.
+
+
+CLOSING NUMBER: A QUESTION FOR THE WALK
+
+NARRATOR (spoken, no music now): Here's the thought to carry down the road. Yesterday's biggest bug wasn't a typo or a bad calculation. It was two correctly written, correctly deployed pieces of software standing right next to each other and simply unable to hear one another, for a reason invisible in either file alone. Everything looked done. Nothing was tested end to end, on the real path a real notification would travel, until someone went looking. So the question: what else in CiViX right now looks finished, passes its tests, deploys cleanly, and has simply never been proven on the actual path a citizen would walk? The iPhone push that's wired but unconfirmed is one honest answer already on the list. Is there a second one nobody's gone looking for yet?
+
+
+END.
+

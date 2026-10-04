@@ -1,0 +1,54 @@
+CIVIX DAILY BRIEF, SEPTEMBER 29. A SHIP'S LOG
+
+
+A NOTE ON THE FORM
+
+Tonight's log is written the way a captain keeps a logbook: dated entries, position, cargo, weather, heading. CiViX doesn't own a ship. That frame is invented, purely to make the facts easier to hold in your head on a walk. Every fact inside the entries below is real, taken straight from what actually shipped in the code and what the automated tests actually found. Nothing here is dramatized beyond the frame itself.
+
+
+SHIP'S LOG. VESSEL: CIVIX. VOYAGE: THE ADVOCACY AUDIT.
+
+
+POSITION, SEPTEMBER 28, AFTERNOON WATCH
+
+Three loads went into the hold in this watch, all pulling in the same direction: making the "advocates effectively" half of the promise more honest.
+
+
+CARGO ONE. EIGHT TOWNS FOUND
+
+The crew has been auditing how well CiViX actually connects a citizen to their real representatives — not just whether the feature exists, but whether it's accurate. This watch turned up eight zip codes in Boston's own neighborhoods that CiViX was wrongly telling citizens fell outside its coverage. A citizen typing in a Dorchester or Roxbury zip code was being told, in effect, "we don't have your city." That's fixed now — those zip codes count as Boston, the way they should have from the start.
+
+Alongside that fix, two smaller but real ones. When CiViX shows a citizen their representative, it now says plainly that the match came from their zip code and links the official government lookup tool, so a citizen can double-check it themselves rather than take the app's word on faith. And when a zip code belongs to a U.S. territory or simply isn't recognized, the citizen now sees a plain-English reason instead of a raw error code — the kind of "HTTP 400" gibberish that means nothing to anyone who isn't a programmer. One more: a senator was showing up with a House district attached, which doesn't exist for a senator and was simply wrong. That's corrected too.
+
+None of this is glamorous work. It's the unglamorous kind that decides whether the "gets to know you" promise is actually true for a citizen in a specific zip code, or just true in the demo.
+
+
+CARGO TWO. THE LOOKOUT CLIMBS HIGHER
+
+The automated test fleet that checks every page on a phone screen — the one that runs before anything reaches the water — used to sail right past the Take Action screens without opening them. This watch taught it to actually open the federal and state action windows, the ones where a citizen drafts a call or an email to their representative, using real representative lookups but canned, non-billed drafts so the check doesn't cost real money every time it runs. That means the lookout can now see problems that were previously invisible to it, because it was never looking at that part of the ship.
+
+
+CARGO THREE. NO GARBLED TRANSMISSIONS
+
+The third load fixes something more subtle. When CiViX summarizes a bill for a citizen, that summary comes from an AI system reading the bill's text. Occasionally the AI would fail to get the actual bill text it needed, and instead of a summary, it would produce something like a confused reply asking for the bill — and that confused reply was sometimes being shown to a citizen as if it were a real summary, and worse, saved so every citizen after them saw the same broken answer. That's now caught and blocked, with older bad summaries already sitting in that cache being retired too. Separately, if the AI service itself is down or overloaded, the citizen now sees a plain message saying so, instead of raw billing or overload text meant for engineers, not citizens. Small, but it's exactly the kind of seam where "never shared, never sold, frictionless and encouraging" is either true in practice or just a slogan.
+
+
+WEATHER REPORT. A SQUALL IN THE LOOKOUT'S OWN RIGGING
+
+Here's the part of the log I'd flag if I were reading this to you and only had time for one thing. Teaching the lookout to open those Take Action windows, in cargo two above, immediately found something: on the federal action screen, across all three phone sizes CiViX tests against, the number of tap targets too small to comfortably tap with a thumb went up, from eight to ten. The test suite has a rule against pages getting worse than a recorded baseline, and this tripped it. As of this log, the automated checks on the main line of the code are showing red on that one page, on that one measure, while the rest of the fleet — the plain functional tests and the checks against the live production site — are sailing clean.
+
+To be precise about what this is and isn't: it's not a new bug that broke something that used to work. Those small tap targets were very likely already there, sitting inside a part of the screen the old lookout simply never opened its eyes to. Now that it does, it's honest about what it sees, and what it sees needs fixing — a handful of buttons or links on the federal action screen that are smaller than they should be on a phone. There's a nightly routine built for exactly this: it checks the morning test run, and if anything failed overnight, it root-causes it, fixes it, and opens a proposal on its own branch rather than touching the main line directly. As of this log, no fix for this one has landed yet. Worth a look this morning to see whether it caught it.
+
+
+HEADING. WHERE THE BOW IS POINTED
+
+The chart for what's next hasn't changed course: the App Store crossing is still the destination. The audit that produced today's Boston fix is the same audit still running against municipal event listings, which haven't been checked yet, and docket classification, which is next after that. Behind that audit sits a page CiViX doesn't have yet at all — a Privacy Policy and Terms of use — required before any store listing can go live, and still unwritten. Somewhere past that: the known, permanent asymmetry that a citizen can send a real one-click email to their state legislator, because state publishes real addresses, but a federal representative still ends in copy and paste, because Congress doesn't publish one and CiViX won't fake its way past a CAPTCHA to get around that. That's not a bug to fix. That's a wall, named honestly, which is its own kind of honesty.
+
+
+AN IDEA FOR THE WALK
+
+Here's the thing worth turning over with the wind at your back. The lookout didn't get worse today. It got better at looking, and what it found was that the ship was already carrying a flaw it simply hadn't noticed. That's an uncomfortable shape for progress to take — the instrument that is working correctly is the one that just turned the light red. It's worth asking, every time a test newly fails: is this the ship breaking, or is this just the day you finally pointed the lamp at that corner of the hold? Getting that distinction right, instead of reflexively distrusting the lamp, is most of what keeps a small crew sane on a long crossing.
+
+
+END OF LOG.
+

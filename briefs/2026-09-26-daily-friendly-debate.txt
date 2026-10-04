@@ -1,0 +1,113 @@
+CIVIX DAILY BRIEF. A FRIENDLY DEBATE.
+Saturday, September twenty-sixth, 2026. The last day and a half.
+
+A format note: today's frame is an invented conversation between two voices, an Optimist and a Skeptic. Neither is a real person. Every fact they cite is real, taken from the commit log, the test history, and the project notes.
+
+
+OPENING STATEMENTS
+
+Two chairs, a coffee thermos between them. The Optimist has already read the whole commit log twice.
+
+OPTIMIST: Twenty-nine commits since yesterday morning. I want to start with the big one: CiViX now digs into everything a citizen sends it.
+
+SKEPTIC: Slow down. Walk me through what that actually means before I get excited.
+
+OPTIMIST: Fine. Send to CiViX already let a citizen forward something, a news link, a post, a screenshot, into their docket. As of yesterday afternoon, the server actually reads what was sent, pulls the page's title and summary, and hands it to Claude with real web search turned on. It comes back with a plain-language headline, a summary, up to three ranked moves the citizen could take, real sources, and, this is the part I like, a real bill number if one genuinely applies, never a guessed one.
+
+SKEPTIC: "Never guessed" is doing a lot of work in that sentence. Who's checking that promise holds?
+
+OPTIMIST: The code, actually. The prompt is written so the bill only shows up when it's found, not made up, and there's a test file for it now that locks that behavior in. That's the pattern this whole project runs on: a promise gets written down, then a test makes sure nobody quietly breaks it later.
+
+
+THE ROUGH MIDDLE OF THE DAY
+
+SKEPTIC: A feature that big rarely lands clean on the first try. What broke?
+
+OPTIMIST: You're right to ask. The token budget for that dig ran out twice, first at two thousand tokens, then again at eight thousand, because the model thinks before it answers and that thinking counts against the same budget. It got raised to sixteen thousand and given an explicit reasoning effort setting. Separately, the web search results were arriving split into fragments around citations, which broke the reply when the app tried to read it back as one piece. Both got fixed, and both got a line logging exactly why an analysis failed, so the next failure explains itself instead of just vanishing.
+
+SKEPTIC: That's still three separate failures in one feature in one day.
+
+OPTIMIST: It's three failures caught and closed in one day. I'd rather see the seams than have them hidden.
+
+
+DOES THE CITIZEN EVER SEE THIS?
+
+SKEPTIC: Here's my actual worry. All of this can be true and still never reach a citizen if it stays buried on a screen nobody opens.
+
+OPTIMIST: That's the second half of yesterday's work, and it's the part that matters more. The Take Action page now has a "Sent to CiViX" feed right at the top: what you sent, CiViX's headline and summary, the claims it checked, up to three ranked moves, sources, a button to send it to DIG for a deeper check, and a "mark done." If something's still being dug into, the page digs it on the spot while you're there and shows you the moment it's ready.
+
+SKEPTIC: And if I close the app before it's ready?
+
+OPTIMIST: Then it finishes on its own, and this morning's commit, the last one in the log at seven forty-one, makes your phone buzz: "CiViX looked into what you sent. Tap to see your move." One push per device, generic on purpose, cleaned up if the phone's registration goes stale.
+
+SKEPTIC: Generic on purpose, meaning it doesn't name the bill in the notification.
+
+OPTIMIST: Exactly. That rule has been in place since the first push notification this project ever sent, and it held here too.
+
+SKEPTIC: Fine, I'll grant you the loop is real. Sending something in from any app, having it researched, and getting tapped on the shoulder when it's ready. That's not a demo, that's a product.
+
+
+WHAT ABOUT GETTING IT IN, IN THE FIRST PLACE
+
+OPTIMIST: Which is why the other big piece from yesterday matters. On the iPhone, CiViX now shows up in the system share sheet, in any app, and you can also just say "Hey Siri, send to CiViX." No opening the app first.
+
+SKEPTIC: And a screenshot? How does text come out of a picture?
+
+OPTIMIST: Apple's on-device text recognition reads it right there on the phone, and only the recognized text leaves the device. The image itself never gets sent anywhere.
+
+SKEPTIC: That's the right shape for "never shared, never sold." I'll allow it.
+
+
+SMALLER REPAIRS, STILL REAL
+
+OPTIMIST: Two more, quickly, because accuracy is the whole product. The bill-status checker was missing some real wording Congress uses: a title-amendment phrasing, "Senate agreed to the House amendment," and a motion to reconsider. All three were caught not by a guess but by the live checks that run against the real congressional record, then fixed, with a test locking in each phrase.
+
+SKEPTIC: So a citizen might have been shown the wrong stage of a bill's life.
+
+OPTIMIST: Briefly, on those specific phrasings, yes. Now they can't be. And separately, every page on the site got the same header: CiViX on the left, the Citizen, Activist or Pro switch in the middle, the light and dark toggle on the right, one line, the same on every page. Small, but it makes the whole app feel like one place instead of ten pages built at different times.
+
+
+WHERE THE SKEPTIC STILL HAS QUESTIONS
+
+SKEPTIC: Now the part you'll like less. Yesterday afternoon, from about a quarter to one until just after five, the automated test suite failed seven times in a row on pushes to the main branch.
+
+OPTIMIST: Before you make that sound worse than it was: every one of those failures was in the live check, the one that tests the real production site. The code tests and the phone-layout tests stayed green the whole time. That fits rapid changes landing faster than the live site could redeploy, not the app being broken for anyone using it.
+
+SKEPTIC: A fair distinction, but seven failures is still seven failures, and it took over four hours to come back green.
+
+OPTIMIST: Agreed. And it did come back green by five, and stayed green, apart from one blip at nine twenty-one last night that cleared itself two minutes later.
+
+SKEPTIC: Here's my other one, smaller but concrete. The project moved its nightly test run to seventeen minutes past the hour yesterday, because GitHub had been skipping runs scheduled right on the hour. Today is the first real morning that fix gets tested. As of the time I'm being written, that run should have fired over half an hour ago, and there's no record of it firing at all, not today, not ever, in GitHub's history for this workflow.
+
+OPTIMIST: That's worth a look, not a panic. It could be a reporting lag on GitHub's side rather than the schedule failing again.
+
+SKEPTIC: Could be. Worth someone actually checking this morning rather than assuming yesterday's fix held.
+
+Both sides agree: the code that ships is solid. The unit tests and phone-layout tests never failed once in this whole period. What deserves a look is the plumbing around the code: the live checks, and whether the nightly run is actually running.
+
+
+WHAT'S MOST LIKELY NEXT
+
+OPTIMIST: Zoom out. The project's own priority list has streamlining marked essentially done: the startup command, the test suite, the health page, this very brief. What was left was finishing Send to CiViX, which is exactly what happened yesterday and this morning.
+
+SKEPTIC: So next is the App Store push.
+
+OPTIMIST: Right. And by the project's own notes, the honest state of that is: an audit is still owed on the "advocating effectively" half, meaning the federal representative lookup, how filings get classified, and city meeting coverage. No Privacy Policy or Terms of Service pages exist yet. Store listing text and the privacy questionnaires aren't written. And Android testing is stuck until there's an Android phone in hand; everything so far is proven only on an iPhone.
+
+SKEPTIC: That's a real list, not a formality.
+
+OPTIMIST: It is. But it's a known, bounded list, which is a much better place to be than an unknown one.
+
+
+ONE THING TO SIT WITH ON THE WALK
+
+SKEPTIC: Before you go, notice what changed in the last day and a half. CiViX used to wait for a citizen to come find out what's happening. Now it can reach out first: a citizen shares one link from any app, and some time later their phone buzzes to say CiViX already looked into it.
+
+OPTIMIST: That's the two founding promises, that CiViX gets to know you and that it advocates for you, actually meeting in one small loop. I think that's worth being proud of.
+
+SKEPTIC: I'll grant the loop is well built. My question is about how it feels, not the code. The moment an app can quietly go do research and tap you on the shoulder later, it starts to feel less like a tool you pick up and more like something watching in the background. This project has a real rule against naming the bill in a push, to keep things from feeling watched. As this loop grows, more captures, more digs, more taps on the shoulder, is that one rule enough to keep it feeling like a citizen's own tool? Or does "never shared, never sold" need a companion promise now, something like "never surprises you"?
+
+OPTIMIST: That's a fair question to walk with. I don't think either of us has to answer it before tomorrow.
+
+
+CiViX. Written for listening, not reading.

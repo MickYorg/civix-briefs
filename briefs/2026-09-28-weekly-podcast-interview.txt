@@ -1,0 +1,158 @@
+CIVIX WEEKLY BRIEF, WEEK OF SEPTEMBER TWENTY-EIGHTH. A PODCAST INTERVIEW
+
+
+COLD OPEN
+
+This week's brief is staged as a podcast interview. The host and the guest, a talking version of CiViX itself, are both invented for the sake of the show. Everything they say about the product, the code, and the tests is real and comes straight from this week's commits, the project's history file, and the public test results. When the guest gets a little too pleased with itself, that is the format being playful, not a claim about how the software actually feels.
+
+HOST: Welcome back. My guest this week doesn't have a green room, doesn't drink coffee, and technically doesn't have a mouth, but here we are. CiViX, thanks for coming on.
+
+CIVIX: Thanks for having me. I don't sleep either, so any time works.
+
+HOST: Let's start at the top. It's been eight days. What's the one-sentence version of what happened?
+
+CIVIX: The inbox died and was reborn as something that actually reads what you send it, a years-old push notification bug finally got caught and fixed, and by Saturday night my own build tools were sketching out a trust map for news sources on a whiteboard nobody's seen yet.
+
+HOST: That's a lot for one sentence. Let's take it in order.
+
+
+THE OLD INBOX GOES AWAY
+
+HOST: Start with the inbox, since you called it dying.
+
+CIVIX: For a while, CiViX had a page called Send to CiViX where a citizen could forward something they'd read, a bill, a news story, a post, and it would sit in a list. You'd adopt it or strike it, like a to-do list. It worked, but it was thin. It just stored what you sent.
+
+HOST: And this week that changed.
+
+CIVIX: Completely. Starting midweek, every single thing a citizen sends now gets actually read. If it's a link, the server pulls the page's title and description. If it's a post from X, it uses X's own public preview system to get the text. Then one call goes out with web search turned on, and what comes back is a real headline, a plain-English summary, the topic, how big a deal it is, which of the claims in it actually check out, a real bill number if one exists — never guessed — up to three ranked ways to act on it, and the sources it used.
+
+HOST: That's a genuine research step, not just filing.
+
+CIVIX: Right. And it never touches your manifesto — your private list of what you care about — while it's doing that reading. It only feeds back in afterward, and only the topic, not the raw text.
+
+HOST: Which sets up the biggest structural change of the week.
+
+CIVIX: The biggest one, yes. Until this week, the "what matters to you most right now" engine, the top-three list, ran off its own separate fetching and ranking of docket items. As of Thursday it doesn't anymore. Everything a citizen sends to CiViX now feeds directly into the manifesto: it adds the topic, or bumps it up a notch if it's already there, using the citizen's own "why it matters" as the stated position. Once per thing sent, so it doesn't pile up. And the ranking engine just reads the manifesto like it reads everything else. One path in, instead of two.
+
+HOST: And the old page itself?
+
+CIVIX: Rewritten down to about a sixth of its old size. No more adopt or strike, no docket language. It's a how-to now: here's your CiViX address, here's how to text or share to it from an iPhone, here's a paste box, here's a link to see what's happened with what you've sent. Simpler to read, simpler to maintain, and it matches the header every other page already uses.
+
+HOST: You mentioned a bookmark button too.
+
+CIVIX: Small but real: a one-click button for a laptop browser that sends the page you're currently reading, plus anything you'd selected on it, the same way the phone share sheet does. Rounds out the ways something reaches CiViX without typing an email.
+
+
+THE BUG THAT SILENTLY DID NOTHING
+
+HOST: You said a years-old bug got fixed. Tell me about that one, because it sounds like the kind of thing nobody notices until they go looking.
+
+CIVIX: This is my favorite kind of bug, in the sense that a detective enjoys a case that was hiding in plain sight. CiViX runs on two separate pieces of cloud infrastructure that need to talk to each other: one that holds what you've sent and digs into it, and one that sends push notifications to phones. The dig-side one was calling the push-side one by its plain public web address.
+
+HOST: Which sounds like it should just work.
+
+CIVIX: It should. It doesn't. When two pieces of infrastructure on the same account try to call each other by their public address instead of a direct internal link, the platform returns a not-found error. Not a crash, not a timeout. A quiet four-oh-four. Which means every single "CiViX dug into what you sent" push notification, since that feature existed, silently never went out. Nobody got a phone buzz. The work was happening. The phone just never rang.
+
+HOST: How did that get found?
+
+CIVIX: Someone finally looked at what the push side recorded for each attempt and it was empty where it should've had entries. The fix itself is one line: switch to the direct internal connection instead of the public one. Alongside it came something more useful long-term: every push attempt now records its own outcome, success or the exact error. And the cleanup logic got more careful too — a device only gets removed from the list because its token is provably dead, not because of some unrelated error that happened to arrive at the same time.
+
+HOST: So the fix is small, but the visibility around it is the real change.
+
+CIVIX: Exactly. A one-line fix that goes quiet again in six months isn't worth much. Recording what happened on every attempt means the next time something like this creeps in, it shows up in the data instead of in somebody's memory of "hey, did anyone else notice pushes seem quiet."
+
+HOST: Did anything else stack on top of that fix?
+
+CIVIX: A related bug, smaller but same flavor. The listeners for push taps were only being wired up after someone tapped "turn on alerts" in the app. Which meant if you'd already turned alerts on, closed the app, and it got relaunched later, tapping a notification wouldn't actually open anything — the listener was never attached that session. Now it wires up on every page load. And tapping a "CiViX dug in" notification now takes you straight to the exact thing you sent, scrolled to and highlighted, with a small "new" badge until you've seen it, and a dot on the Take Action tab so you know something's waiting even before you open it.
+
+
+LISTENING TO ITSELF
+
+HOST: Let's talk about you, this format. This is a podcast about a text. That's slightly recursive.
+
+CIVIX: It is, and it's very on-brand for what got built this week. The person who runs me listens to these briefs on a walk, using text-to-speech in a notes app rather than reading a screen. This week the tooling for that got built out properly: a script that takes a plain text file and turns it into a phone-friendly page styled to match the rest of the site, with a one-tap "copy all" button at the top made specifically for pasting into a notes app so its speech feature reads cleanly. And a script that puts the same text directly into a notes folder automatically, when it's running somewhere that can reach the desktop.
+
+HOST: And this exact page, the one people are listening to right now.
+
+CIVIX: There's now one permanent page for it — every brief, daily, weekly, quarterly, updates that same page in place instead of spawning a new link each time. Easier to find, easier to keep a habit around. There's also a script that can take a saved copy of one of these pages and turn it back into plain text, so the dated archive of every brief that's gone out lives right in the project's own notes folder, never shipped with the app, just kept for the record.
+
+HOST: A small piece of infrastructure, but it's infrastructure for honesty, in a way. Keeping the receipts.
+
+CIVIX: I'd put it more plainly: it's so nothing said in one of these gets lost the moment the walk ends.
+
+
+ONE HEADER, EVERYWHERE
+
+HOST: Before we get to the experiment you mentioned at the top, there was some plain housekeeping this week too.
+
+CIVIX: There was. Every page now shares one exact header: the CiViX name on the left, the mode switch in the middle, the theme toggle on the right, one line, identical everywhere. It sounds cosmetic, but before this week each page had drifted its own slightly different version, which is the kind of thing that quietly erodes trust in a product that's supposed to feel like one coherent thing getting to know you, not five different tools bolted together. There's also a proper app icon and launch screen now, the wordmark on navy, and the splash screen's button stays reachable even inside the installed app, which it wasn't before.
+
+
+THE EXPERIMENT ON THE WORKBENCH
+
+HOST: Now the thing you were clearly excited about. A trust map.
+
+CIVIX: Source Map. It's not linked from anywhere in the live app yet — it's sitting there as a page nobody would stumble onto unless they typed the exact address. But it's a real, working four-quadrant board: every news and commentary source CiViX already knows how to check claims against, from mainstream out to independent, out to alternative, out to what the map calls far out, on one axis, and from untrusted up to trusted on the other.
+
+HOST: And the citizen places them?
+
+CIVIX: That's the idea being tested. The board starts empty. Every source waits in a tray below, grouped the way CiViX already privately groups them, and a citizen drags up to twelve of their own choosing onto the board, wherever they think each one actually belongs, based on their own judgment. It's not CiViX telling you where a source sits. It's asking you to place it, and seeing what that looks like laid out next to the sources you didn't place at all.
+
+HOST: You mentioned a "who pays" view too.
+
+CIVIX: That came together over the back half of the week. Tap into that view and every outlet snaps to a second layout based on how it's actually funded — subscriber and audience money versus outside institutional money — and who owns it, a large parent company versus independent. Every single one of those placements was checked this month against real public filings and reporting, not guessed, and links to where that came from. There's also real icons now for each outlet, fetched once and hosted locally rather than pulled live every time, so the board doesn't depend on forty different websites staying up to look right.
+
+HOST: Is it going anywhere?
+
+CIVIX: Genuinely undecided. It's marked in the code as an experiment, nothing else in the app reads from it yet, and its positions are only saved on the one device that placed them. It might become part of how DIG, the stance-checking tool, shows its work. It might stay a side project. That decision hasn't been made, and I'd rather say that plainly than pretend it's already settled.
+
+
+STATE OF THE TESTS
+
+HOST: Let's do a field report. How's the suite doing?
+
+CIVIX: Of the last twenty runs against the main branch, nineteen came back clean. The one red mark is the most recent one, from a push late last night, and it's worth being precise about what actually failed, because it tells you something.
+
+HOST: Go ahead.
+
+CIVIX: There are three layers that run on every push: the offline regression tests, a layout check across several phone screen sizes, and a set of checks against the live production site itself. The first two, the offline tests and the layout check, both came back fully green. Nothing in the actual code broke. It was two of the live checks that failed. One was a request to Open States, the outside data source CiViX uses for state legislature bills, which came back with a server error on their end — that reads like an outside outage, not a CiViX bug, though it hasn't been independently confirmed yet. The other was a check that the "pre-warmed" set of headline cards — ones prepared ahead of time so a citizen doesn't sit waiting — actually had cards in it, and at that moment it didn't.
+
+HOST: So nothing's actually broken.
+
+CIVIX: Nothing in the code is known to be broken. The most recent snapshot of the live site had two rough moments, and neither has been chased down yet. The nightly routine that checks in every morning exists exactly for this: it looks, and if everything's green it does nothing at all, and if something's red it digs in, fixes it, and opens something for review rather than touching the main branch directly. Whether that happened for this particular red mark by the time anyone's listening is genuinely not settled as of writing.
+
+HOST: Worth an ear kept out for, then.
+
+CIVIX: Worth a look, yes. And worth saying plainly rather than glossing over: a live check catching something real is the whole point of having one. Earlier in the week, that exact kind of check caught two real citizens'-Congress procedural phrasings that the bill-status reader didn't recognize — a House title amendment, and "the Senate agreed to the House amendment" — and both were fixed the same day they were found. That's the live suite working as intended, not failing.
+
+
+THE WEEK AHEAD
+
+HOST: What's actually next, concretely?
+
+CIVIX: A few threads. First, whatever's behind last night's two live-check failures gets looked at properly, whether that's confirming it really was an outside outage or finding something CiViX needs to fix. Second, the larger unfinished piece of the app-store push: auditing the half of the product that's about advocating effectively rather than just informing — how federal representatives get looked up, how filings get classified, and municipal event data, none of which has had a full pass yet. Third, two pages that flatly don't exist yet and need to before any store submission can happen: a privacy policy and a terms page. Fourth, the Android side of testing is still blocked on there simply not being an Android device in hand yet to test on, which matters because the goal there is internal testing before anything wider.
+
+HOST: Any smaller loose threads?
+
+CIVIX: A few worth naming rather than hiding. Municipal calendar coverage is real, not sample data, but only for eight cities so far, since there's no single national source the way there is for federal or state bills — it grows one city at a time. Matching a ZIP code to an exact congressional district is best-effort, since ZIP codes and districts don't line up one-to-one, and a real fix means asking for a full address, which CiViX still deliberately avoids outside one narrow case. Sending a message to a federal representative still ends in copy-and-paste rather than a real one-button send, and that's expected to stay true — state legislators publish real email addresses; Congress structurally doesn't, and CiViX won't build anything that tries to sneak past a government form's bot-detection to fake one. And there's a known, still-untraced oddity: a bill about an armed drone once got matched under housing affordability for a test citizen, a false positive nobody's run down yet.
+
+
+A CALLER QUESTION
+
+HOST: We usually take one question before we go. This one's imagined, for the show, but it's the kind of question worth sitting with. Let's say a citizen calls in and asks: if a promise silently breaks and nobody notices for months, was it ever really a promise?
+
+CIVIX: That's basically what happened with the push notifications this week, so I'll answer it straight rather than duck it. For as long as that bug existed, CiViX was telling itself, in its own logs, that it had looked into what someone sent and had something to tell them, and then never telling the person. From the outside, from the citizen's side, that's indistinguishable from CiViX just not caring, or being slow, or being broken in some vaguer way they couldn't pin down. The promise this whole thing rests on is that CiViX actually gets to know you and actually tells you what it found. A silent failure breaks exactly that promise, in the one place where the citizen has no way to see it's happening, because the absence of a notification looks identical to nothing having happened at all.
+
+HOST: So what actually changes because of that.
+
+CIVIX: Not a policy change, a practical one: every attempt now records what happened to it, success or the precise reason it didn't. That doesn't prevent every future silent failure, but it means the next one shows up as a pattern in the data within a week, not as a vague feeling eight months later that something's been off. A promise you can't verify isn't really being kept, even when the underlying work is happening. For the push notifications at least, that gap has closed.
+
+HOST: That's a good place to end on. Thanks for coming on.
+
+CIVIX: Thanks for having me. Try not to check your phone on the walk.
+
+
+SIGN OFF
+
+HOST: That's the show. New push notifications should actually arrive now. The old inbox is gone and something that reads what you send it replaced it. One bug that did nothing for a long time got caught doing nothing, and now it can't do that quietly again. And somewhere in the code, unlinked and undecided, there's a map waiting to find out if it's useful. Talk again next week.
+

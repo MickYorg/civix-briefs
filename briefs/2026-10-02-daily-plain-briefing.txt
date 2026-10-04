@@ -1,0 +1,38 @@
+CIVIX DAILY BRIEF, OCTOBER 2. A STRAIGHT, WARM, PLAIN BRIEFING
+
+Good morning. It was a quiet stretch, so this one is short and honest rather than padded. Here is what actually happened in the last day and a half, what it means for citizens, and what is probably coming next.
+
+
+WHAT CHANGED
+
+Only two real commits landed since the last brief, and only one of them touches what a citizen experiences.
+
+The one that matters: a promise CiViX makes was quietly not being kept, and now it is. When someone shares something into CiViX from their phone, the share screen tells them they can delete it anytime. There is a button on the Take Action page called "Not for me" that is supposed to do exactly that. But when the old inbox system was retired a little while back, that button lost its teeth. It still looked like it worked. It still cleared the item from the screen. But under the hood it was only hiding the item locally, not actually deleting it from CiViX's servers. The data was still sitting there.
+
+That is now fixed. Tapping "Not for me" sends a real delete all the way to the server, the same way the share sheet always promised. It sounds small, but it is exactly the kind of thing that matters most here, because "never shared, never sold" is supposed to be an engineering fact, not a marketing line. A promise that quietly stops being true the moment nobody is looking is the worst kind of bug, because nothing visibly breaks. A test was added so this specific promise cannot silently drift again.
+
+The second change was not citizen-facing at all. It was more work on the tool that turns a phone screen recording into a short social media clip — the kind that would show someone sharing an article into CiViX and watching it turn into a real action. Yesterday's tweak made the on-screen tap markers, the little dots that show where a finger touched the screen, bolder: amber, with a white ring and a ripple that expands outward. Cosmetic, but it is in service of something real, which is telling the CiViX story in fifteen seconds instead of in a paragraph nobody reads. Over the day before that, several more pieces of that same demo pipeline landed too — a script to cut a recording into clips, an option to shrink the file size so it fits upload limits, and a full end-to-end dry run of the loop itself, from a share, into CiViX, into a real analysis, out to a push notification and a drafted response.
+
+
+TESTS AND RISK
+
+Nothing is broken. Every test run in the period came back green, both the ones that fire on every push and the nightly run against the live production site. That streak goes back a few days now, since the last real test failure was caught and fixed around the twenty-eighth of September, something about how bill summaries handle AI failures. So right now the project is in a stable, tested state, which is worth saying plainly rather than skipping past, since not every brief gets to say it.
+
+
+WHAT'S LIKELY NEXT
+
+The project's own priority list points toward two places. First, more of this demo-clip and storytelling work, since it is mid-stream and clearly useful for showing rather than telling what CiViX does. Second, and more importantly, the next real phase of the app store push: finishing an audit of the "advocating effectively" side of CiViX, meaning the lookup that finds someone's elected representatives, how incoming articles get classified, and municipal government events, which have not been checked over as carefully as the federal and state sides have. Alongside that, a privacy policy and a terms of service page need to actually be written, since right now neither exists, and no app can go to either store without them.
+
+There is also a known, permanent limitation worth naming honestly rather than hiding: reaching out to a member of Congress will likely always end in copy and paste, not a one-button send. State legislators already get a real one-button email, because the state data includes real addresses to send to. Congress simply does not publish that the same way, and CiViX is not going to try to sneak around a CAPTCHA to fake it. That is not a bug to be fixed later. It is a wall, and it is better to say so than to keep implying it will someday go away.
+
+
+SOMETHING TO SIT WITH
+
+The share-sheet bug is worth turning over on the walk. The interesting thing about it was not that deleting broke. It is that deleting looked like it worked, for weeks, while quietly not working. Nobody saw an error. Nothing crashed. The screen did exactly what you'd expect a successful delete to look like.
+
+That is a particular kind of risk, worth naming for CiViX especially, since the whole premise of this project rests on a citizen trusting that what they share stays theirs to keep or discard. Most trust-breaking bugs are loud. This one was silent, and it was silent in exactly the place where silence is most dangerous: a promise about privacy and control.
+
+So the question for this morning's walk is less about this one fix and more about the pattern underneath it. Every page on CiViX makes some small promise in its copy: this will stay private, this is yours to delete, this was never sold. Each of those promises is backed by some specific line of code somewhere, and that line of code can go quiet the same way this one did, the next time something nearby gets refactored. The fix here was good. But is there a way to go looking for the other promises like it, the ones that currently work by accident of nobody having touched that code recently, rather than by any test standing guard over them? That is probably worth an afternoon at some point, not because anything else is known to be broken, but because this is exactly the shape a next one would take: quiet, invisible, and only found by someone who goes looking specifically for broken promises rather than broken features.
+
+That's the brief. Nothing on fire, one real promise kept more honestly than it was the day before, and a reminder that the quiet bugs are the ones worth hunting on purpose.
+
