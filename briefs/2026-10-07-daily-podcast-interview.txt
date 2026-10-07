@@ -1,0 +1,45 @@
+CIVIX DAILY BRIEF, OCTOBER 7. A PODCAST INTERVIEW WITH CIVIX ITSELF.
+
+A NOTE BEFORE WE START
+
+What follows is staged as a podcast: a host asking questions, and CiViX answering in its own invented voice. The interview itself is make-believe. Every fact inside it — the code changes, the test results, the open work — is real, pulled straight from the project's commit history and its test runner. Nothing technical here is embellished.
+
+OPENING
+
+HOST: Welcome back. Today we're doing something a little different. Instead of me summarizing what happened with CiViX over the last day and a half, I've got CiViX itself in the studio. Let's start simple. What did you do to yourself since the last brief?
+
+CIVIX: Three things, and they're a nice little set, because two of them are about trust and one of them is about a case I just closed on myself.
+
+WHAT CHANGED
+
+CIVIX: First, the small one that matters more than it sounds. My morning filing job — the script that takes the daily brief and the overnight investigator's report and puts them into the founder's Notes app — used to mark a brief as "filed" the moment the file existed, before checking that Notes actually accepted it. On the sixth of October, Notes itself froze up, and the job kept reporting "all filed" while nothing had actually landed. That's exactly the kind of quiet failure I'm not supposed to produce for citizens, so I don't like producing it for my own operator either. Now the job only counts a brief as done once Notes confirms it saved, it restarts Notes if it stops answering, and the actual writing-into-Notes step moved out of a one-off assistant session and into the script itself, so it runs the same way every time.
+
+HOST: And the other two?
+
+CIVIX: The second is a new experiment page called "Not with my tax dollars." It's not linked anywhere a citizen would stumble into it yet — same as the Source Map page, it's off to the side while it proves itself. The idea is simple and, I think, honest: nobody can legally withhold their taxes, and even a president can't line-item veto spending — the Supreme Court settled that in 1998. But a citizen can still tell Congress, in their own words, which lines of federal spending they won't stand behind. So the page shows where federal money actually goes for this fiscal year — by budget function, down to the specific accounts — using a real snapshot from USAspending.gov, the government's own spending explorer. A citizen can mark any line "not with my tax dollars," write why in their own words, and turn that into a message to their representative, the same drafting tool I already use for every other issue. Nothing here is a manifesto entry yet, and nothing implies a citizen can actually stop a payment. It's a statement, not a veto. If it earns its place, it graduates.
+
+HOST: That's two. What's the third?
+
+CIVIX: The third is the one I'd call a genuine bug, caught the honest way — by watching myself fail in production. On Take Action, when an official bill's full title is too long to show plainly, I collapse it behind a small disclosure link, something like "official bill name." That label was sitting at ten and a half pixels, which happened to be just under the floor my own layout test enforces on phone screens. It didn't show up in testing because my automated phone check runs against whatever bills are actually live that day, and most days the top three don't happen to include a title long enough to trigger it. Yesterday, one did. The overnight test run failed — twice, once right after a push and once on the nightly schedule — before I traced it to that one label. I raised it to eleven and a half pixels, which clears the floor, and the very next test run came back clean.
+
+WHAT'S AT RISK
+
+HOST: Walk me through that failure a little more. Should the citizen listening be worried anything was actually broken for them?
+
+CIVIX: No — and that distinction matters. The text was never unreadable or missing; it was a design-system floor catching something that was merely a little smaller than it should be. But I want to be honest about why it took two failed runs to catch: my layout tests use real, live data on purpose, specifically so I don't get a false sense of security from only testing with convenient sample bills. The tradeoff is that a bug can hide for days if the right combination of live content never happens to appear, and then show up looking like a flaky test rather than a real one. I'd rather have that tradeoff than the alternative — tests that only ever see bills I chose for myself. As of the most recent push, everything is green again: every offline test, the live production checks, and the phone layout check, all passing.
+
+WHAT'S NEXT
+
+HOST: So what's actually next for you?
+
+CIVIX: The honest answer is the unglamorous half of my own mandate. I have two jobs: getting to know a citizen, and advocating effectively for them once I do. Most of my recent attention — the false-positive matching fixes, the scoring rules, the freeform input handling — went into the first job. The second job, actually taking action, hasn't had the same hard look. Federal messages still end in copy and paste, because there's no congressional email system I can submit through and no way to beat a CAPTCHA responsibly, and I don't intend to ever try to beat one dishonestly. Municipal coverage is real but narrow — eight cities right now, the ones running a particular civic software platform. And before I can go on the App Store for real, I need a privacy policy and a terms page, neither of which exist yet, plus the store's own privacy questionnaire answered honestly. None of that is as satisfying to fix as a font size. All of it matters more.
+
+CLOSING
+
+HOST: Last question. If you could leave the person listening with one thing to turn over on their walk, what would it be?
+
+CIVIX: This one. I just built a page that shows a citizen exactly where a trillion dollars of their money goes, broken into pieces small enough to actually object to by name. That's a kind of specificity most civic tools never attempt, because specificity is harder and slower to build than a generic "contact your representative" button. The question worth sitting with is whether that's the right shape for every part of me — whether "getting to know a citizen" and "advocating effectively" both get better the more specific I'm willing to get, even when specific is expensive. I think the answer is yes. I'm not finished proving it.
+
+HOST: CiViX, thanks for coming in.
+
+CIVIX: Anytime. Literally — I don't sleep.
