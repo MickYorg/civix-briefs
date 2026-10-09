@@ -1,0 +1,96 @@
+CIVIX DAILY BRIEF, OCTOBER 9. A MUSICAL.
+
+A note before we start: this is staged as a small musical, with made-up stage directions and a company of singers who don't exist. Every lyric is built only from real facts, the code, the commit history, the test results. Nothing in the facts is invented, only the staging around them.
+
+OVERTURE
+
+The curtain is still down. A single low hum from the orchestra pit, meant to sound like a server quietly doing nothing wrong, which is the whole plot of tonight's show. The lights come up slowly on an empty stage. No actors yet. Just a worklight, like the one left on in an empty office overnight.
+
+NARRATOR: Two nights ago, this stage was busy. Tonight, it is almost perfectly still. That stillness is the show.
+
+VERSE ONE, SUNG BY THE ENSEMBLE, LOW AND EVEN
+
+The last line of code came in on a Tuesday night,
+a number on a screen, from ten point five to eleven point five.
+A disclosure line, the bill's official name,
+got caught by its own test, too small to read, so they made it plain.
+
+That same evening, a second thread was spun,
+a page called tax dollars, built off to the side, linked to none.
+Where does the money go, which line would you refuse,
+no one can withhold a tax, but a citizen can still say whose.
+
+CHORUS, FULL COMPANY
+
+This is the bar we sing to, the bar we always meet:
+get to know the citizen, and stand up on their feet.
+Never shared, never sold, not a copy, not a trace,
+a frictionless, encouraging, honest kind of place.
+
+A BRIEF SPOKEN INTERLUDE, THE NARRATOR ALONE AT THE FOOTLIGHTS
+
+Here is where the music has to stop and the facts have to speak plainly, because nothing has happened since. Not a figure of speech, an actual fact from the log. In the thirty six hours before this brief was written, there were zero commits to the project. None. The last work anyone did was that font size fix and that tax dollars experiment, both from Tuesday night. Wednesday and Thursday, nothing shipped.
+
+VERSE TWO, SUNG SOFTLY, LIKE A LULLABY
+
+While no one touched a single line,
+a watchman walked the halls each night.
+A scheduled test, run on its own,
+checked the live site, bill by bill, alone.
+
+It found the page, it found the fix,
+it ran against whatever bills were live that week,
+different data than the day it passed before,
+and still it passed, which matters more.
+
+CHORUS, REPEATED, QUIETER
+
+This is the bar we sing to, the bar we always meet:
+get to know the citizen, and stand up on their feet.
+Never shared, never sold, not a copy, not a trace,
+a frictionless, encouraging, honest kind of place.
+
+THE BRIDGE, SUNG IN A DIFFERENT, MORE ANXIOUS KEY, ONE VOICE AT A TIME
+
+A FIRST VOICE: Somewhere in the matching code, a drone bill got pulled in,
+tagged by accident as housing, nobody's traced which word let it win.
+
+A SECOND VOICE: A daily budget, twenty dollars, set some weeks ago,
+while the limit underneath it grew to a hundred checks, not slow.
+
+A THIRD VOICE: And on the list of things the app still needs before a store will let it in,
+there is still no page that says, in writing, what happens to your words within.
+
+ALL THREE TOGETHER: No privacy page. No terms at all. Those words don't yet exist.
+For an app that promises never shared, that gap is first upon the list.
+
+A SPOKEN LINE, THE NARRATOR AGAIN
+
+That bridge is not new news tonight, it was named in yesterday's brief too, and it is still true today, because nothing moved to change it. A quiet two days is not the same as a finished list. The font fix held, the nightly test proved it held, and that is real. The drone bill is still mistagged. The budget cap is still mismatched. And the privacy policy, the actual page a citizen could read before trusting CiViX with what they care about, still does not exist anywhere on the site.
+
+VERSE THREE, THE ENSEMBLE, BUILDING
+
+So what comes next, if the log falls quiet again,
+look up the list the founder keeps, it says exactly when.
+Audit the half that advocates, the calls, the forms, the mail,
+and write the page that says what's kept, before a store lets the app set sail.
+
+Because a store will ask the question, plainly, in a form,
+what do you do with what they tell you, what's the policy, what's the norm.
+And right now the honest answer is a briefing file, not a public page,
+that gap gets closer every day it's named, but closer isn't done, at this stage.
+
+FINAL CHORUS, FULL COMPANY, HELD LONGER ON THE LAST LINE
+
+This is the bar we sing to, the bar we always meet:
+get to know the citizen, and stand up on their feet.
+Never shared, never sold, not a copy, not a trace,
+a frictionless, encouraging, honest kind of place,
+and a page that says so plainly, in the citizen's own sight,
+is the one unwritten verse still owed, before the curtain's right.
+
+CURTAIN, THE NARRATOR ALONE AGAIN
+
+House lights up halfway. No bow yet, just one last thing to leave with you.
+
+Here's the question for the walk, no singing required. CiViX has carried the promise "never shared, never sold" since its earliest briefing, and has kept it in the actual code, no trackers, no analytics, real server deletes when a citizen opts out. But there is still no public page that writes that promise down in plain words, the kind of page any citizen could read before deciding whether to trust CiViX with their manifesto in the first place. Is a promise that's only kept in code and never written down in public still a promise, or is writing it down the thing that actually makes it one? And if you had to write that page yourself, starting today, what's the very first sentence you'd want a citizen to read?
