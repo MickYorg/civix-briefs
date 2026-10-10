@@ -1,0 +1,39 @@
+CIVIX DAILY BRIEF, OCTOBER TEN. A FIELD GUIDE.
+
+Good morning. Today's dispatch comes to you as a field guide, the kind of quiet narration you'd hear over footage of a meadow at dawn. The habitat under observation is the CiViX codebase, and what we're tracking is a creature most citizens never see: the automated watcher that tests the live site every night while everyone else sleeps.
+
+THE QUIET MEADOW
+
+For the last day and a half, almost nothing moved in the main part of the forest. No new code was planted in the trunk of the project since Monday evening, when a small cosmetic fix went in, nudging the type size on a disclosure line in Take Action from ten and a half pixels up to eleven and a half, so a long official bill title would stop crowding the screen. Since then, the meadow has been still. That stillness is not a bad sign. It often means the team is between pushes, letting the automated systems do their nightly rounds undisturbed.
+
+THE NIGHT WATCH
+
+But stillness in the meadow doesn't mean nothing is happening. Every night, a process called the nightly investigator runs a batch of tests against the actual live website, mycivix.com, not a copy, the real thing citizens use. Think of it as a ranger walking the perimeter after dark, checking that the fences are where they should be.
+
+Two nights ago, the ranger found something. One of the checks looks at bills moving through Congress and asks a simple question: does CiViX ever call a bill "Introduced" after it has clearly moved further along, like being sent to a committee? On this particular night, the answer was yes. A bill had been, in the language of the Senate, "read twice and referred to the Select Committee on Intelligence," a formal way of saying it had already been handed off to the committee that will decide its fate. CiViX was still calling it merely "introduced," the very first and least informative stage.
+
+FIELD NOTES ON THE SPECIMEN
+
+Here is why this particular find matters more than it might sound. CiViX's whole promise to a citizen is that it won't just hand back what a quick search engine would. If a citizen is watching a bill because it touches something in their manifesto, the list of what they care about, the difference between "introduced" and "sent to committee" is the difference between "nothing to do yet" and "this is already moving, and the committee is where the real decisions get made." A wrong label here isn't cosmetic. It can quietly steer a citizen's sense of urgency in the wrong direction.
+
+The investigator traced the cause back to a small pattern-matching rule buried in the code that reads Congress's own plain-English descriptions of what happened to a bill. That rule knew how to recognize a referral to "the House Committee" or "the Senate Committee," but it had never been taught to recognize a referral to a committee with its own proper name attached, like a "Select Committee." A very similar gap, for plain House and Senate committees, had already been fixed back in September. This was the same species of bug, just a different plumage, the pattern simply hadn't learned this particular name yet.
+
+By this morning, the investigator had already written the fix: loosening that rule so it recognizes a referral to any named committee, not just the generic House or Senate kind. It added two tests that lock in the exact wording that tripped it up, so this species of bug can't sneak back in unnoticed. It also bumped an internal version number on the calendar's cache, which matters because CiViX stores bill data for an hour at a time to avoid hammering Congress's servers; without that bump, the old, wrong label could have kept being served even after the fix lands.
+
+SIGNS OF STRESS IN THE HABITAT
+
+A good field guide also notes what's under strain. Right now there are two of these investigator reports sitting out in the open, waiting, like scent markings nobody has come back to check. One is from four days ago, when the nightly run came back red for an entirely different reason: GitHub's own machinery failed to hand the job a runner at all, a plumbing problem on their end, not a defect in CiViX. The investigator confirmed that and explained it clearly. The other is today's real fix, described above. Neither has yet been folded back into the main trunk of the project. That's not an emergency, these are proposals waiting for a human's eye, exactly as designed, but a backlog of two is worth noticing before it becomes three or four.
+
+One more pattern worth a naturalist's eyebrow: the nightly check is scheduled to run at seventeen minutes past seven each morning, Eastern time, specifically chosen to dodge the internet's busiest hours. For several nights running now, it has actually fired closer to early afternoon instead, sometimes six hours late. The investigator itself flagged this drift as something to keep watching. It appears to be GitHub's scheduling running behind under load, not anything CiViX is doing wrong, but a pattern that repeats for a week deserves to stop being called a coincidence.
+
+WHAT TO WATCH FOR NEXT
+
+Looking at the project's own list of open work, the big unfinished country is still the path to the app stores: finishing the audit of how well CiViX actually helps a citizen advocate, meaning the federal representative lookup, how bills and dockets get classified, and municipal events, which still haven't had their turn under the microscope. There's also no privacy policy or terms of service page yet, which both app stores will ask for before anything can be submitted. And Android testing is still waiting on an actual Android device to test with.
+
+Given what just happened, the most likely next move is simple housekeeping: reviewing and merging the two pending fixes sitting in the open, and perhaps teaching that same committee-naming rule a few more names it might not recognize yet, since Congress has no shortage of committees with their own proper titles.
+
+A NATURALIST'S QUESTION
+
+Here is something to turn over on the walk. The nightly investigator is, in its own small way, a second set of eyes that never sleeps, catching a mislabeled bill before any citizen saw it. That's a genuine win. But it also means there's now a small population of finished, tested fixes living outside the main trunk, waiting on one person to look at them. A watcher that never sleeps is only as useful as the attention it eventually gets. Worth asking: is the right fix here to look at these more often, or to trust the next one a little further before it even needs a look at all.
+
+That's the meadow as it stood this morning. Quiet on the surface, with real work happening underneath, exactly the way the healthiest systems usually look.
