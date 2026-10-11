@@ -1,0 +1,33 @@
+CIVIX DAILY BRIEF, OCTOBER ELEVEN. A SHIP'S LOG.
+
+A quick note before the log itself. Today's dispatch is written as a ship's log, entries written at different hours, because the founder often works from a boat and the habit fits. Everything in these entries is real, taken from the project's own commit history and its public test results. Nothing is invented except the voice of the logbook itself.
+
+LOG, SIX FORTY-FIVE IN THE MORNING. POSITION: CALM WATER.
+
+Opening the log to find very little change since yesterday's entry, and that is worth saying plainly rather than dressing up. The last line of code written into the main trunk of CiViX, the version that actually runs the live site, went in five days ago, this past Monday evening. It was a small, careful fix: a disclosure line in Take Action, the screen where a citizen drafts a call or an email, was showing an official bill's full name in text just a hair too small, ten and a half pixels, which is below the floor the project's own phone check enforces. It was nudged up to eleven and a half. Since that Monday evening, the main trunk has not moved. Calm water. No storms, but also no new ground covered.
+
+LOG, SEVEN FIFTEEN. SOUNDINGS TAKEN.
+
+Calm on the surface does not mean nothing is happening below the waterline. Every night, an automated process called the nightly investigator runs the project's full test suite against the real, live website, not a rehearsal copy, and writes up what it finds. Two of its reports are sitting unmerged right now, both still waiting for a human to look at them, and both were already flagged in yesterday's log. Today's entry has to report that neither has moved. That is the real news of this watch: not a new problem, but an old one aging by another day.
+
+The older of the two, filed five days ago, is the simple one. A nightly run came back red, but the investigator traced it to GitHub's own machinery failing to hand the testing job a computer to run on at all, a plumbing failure on their end, not a flaw in CiViX. Nothing to fix in the code; it is really just a note for the record, sitting in the open awaiting a merge that costs nothing to grant.
+
+The newer one, filed the day before yesterday, is the one worth a sailor's full attention. The investigator caught CiViX mislabeling a real bill. The bill had been, in the Senate's own language, read twice and referred to the Select Committee on Intelligence, meaning it had already been handed off to the committee that will decide its fate. CiViX was still calling it merely introduced, the very first and least informative stage a bill can be in. For a citizen watching that bill because it touches something in their manifesto, the list of what they care about, that is not a cosmetic slip. It is the difference between nothing to do yet and this is already moving.
+
+The investigator found the cause: a pattern-matching rule that reads Congress's plain-English description of what happened to a bill only knew how to recognize a referral to the House Committee or the Senate Committee, generic names. A committee with its own proper name attached, like a Select Committee, had an extra word the rule did not expect, so it fell through to the default label. The fix loosens that rule to accept any named committee, adds the exact wording that tripped it up as a permanent test, and bumps an internal version number on the calendar's one-hour cache, so the old wrong label cannot keep being served after the fix lands. All of that is written, tested, and sitting ready. It simply has not been pulled into the main trunk yet.
+
+LOG, EIGHT TEN. WEATHER WATCH.
+
+One pattern in the instruments deserves a second look tonight. The nightly test run is scheduled for seventeen minutes past seven each morning, Eastern time, deliberately chosen to dodge the internet's busiest hours. For several mornings running, it has fired hours late instead, once by more than eight hours. As of filing this log, this morning's run had not yet appeared at all. The investigator already flagged this drift once, and it still looks like congestion on GitHub's side rather than anything wrong with CiViX's own instruments, but a pattern repeating for the better part of a week stops being a coincidence and starts being worth a support ticket if it continues much longer.
+
+LOG, LATE MORNING. CHARTED COURSE.
+
+Looking at the ship's own chart of open work, the big unmapped water is still the same one from recent entries: finishing the audit of how well CiViX actually helps a citizen advocate, which means checking the federal representative lookup, how dockets get classified, and municipal events, none of which have had a close look yet. There is still no privacy policy or terms of service page, and both app stores will ask for one before anything can be submitted. Testing on Android is still waiting on an actual Android device to test with, since only the founder's iPhone has been verified end to end so far.
+
+Given two days of calm water and a small backlog building, the most likely next move is simple seamanship: review and merge the two pending reports sitting in the open, rather than let a backlog of two become three or four. Beyond that, the audit work and the privacy pages remain the longest leg of this voyage, the part that has to happen before CiViX can reach either app store at all.
+
+CLOSING ENTRY. SOMETHING FOR THE WALK.
+
+Here is the thought worth turning over before breakfast. The nightly investigator is, in its own modest way, a second set of eyes that never sleeps, and it already caught one real mistake this week before any citizen saw it, a bill wrongly called merely introduced when it had already reached committee. That is a genuine win for a platform that promises to actually get to know what someone cares about and advocate for it well. But a watcher that never sleeps is only as useful as the attention it eventually receives, and right now there are two finished, tested pieces of work sitting just outside the main trunk, aging by another day each time this log is opened. Is the right fix here to check in on that small queue more often, even briefly, or to build enough trust in the investigator's own judgment that some of its calmer findings, like an infrastructure note with no code change at all, could move into the trunk on their own. Worth deciding before the queue decides it by simply growing.
+
+End of log for this watch. Seas calm, instruments steady, two items still awaiting a hand at the helm.
