@@ -1,0 +1,177 @@
+CIVIX WEEKLY BRIEF, WEEK OF OCTOBER 5. A MUSICAL.
+
+A NOTE BEFORE THE OVERTURE
+
+This week's brief is staged as a musical. The facts are all real, pulled from the actual code history and test results. The singing, the characters, and the dialogue are an imaginative device to carry those facts — nobody at CiViX broke into song this week, and no line below is a real quote from the founder.
+
+OVERTURE
+
+[The curtain is still down. An orchestra tunes up: a scale that sounds like a server booting.]
+
+COMPANY:
+A week in the life of a small civic app,
+built on a boat, built between naps,
+a manifesto that nobody sells,
+a calendar that rings its own bells.
+Four busy days, then four quiet ones,
+a night watchman working while everyone's done —
+this is the week, so let's begin,
+the lights come up, and the curtain spins.
+
+[The curtain rises on a wireframe office: a laptop, a phone, a line of code scrolling by like rain.]
+
+ACT ONE: THE INBOX LEARNS TO FOLD
+
+The week opened on Sunday the fourth with Take Action's "Sent to CiViX" inbox getting a real redesign. Until now, when a citizen forwarded something to CiViX — a flyer, a headline, a screenshot — the items that came back sat in a flat list. Now the latest three show up as one-line summaries: the headline, where it came from, whether CiViX is still digging into it, and a little "New" badge. Tap one open and it unfolds into three sections — What you can do, What it claims, Sources. If a citizen opened it because a push notification said "CiViX dug in," every section opens automatically, since that's the one time they actually asked to see the whole answer at once. Otherwise everything starts folded, the way a wallet stays closed until you need it.
+
+THE INBOX (sung, a little shy):
+I used to be a list, flat and plain,
+three lines of text, over and over again.
+Now I fold like a letter, I open like a door,
+I show you more only when you ask for more.
+
+COMPANY:
+Fold and show, fold and show,
+the inbox learns what citizens want to know.
+
+[Stage direction: the old inline buttons, which put each action step's title and explanation side by side with uneven spacing, are swapped for clear tappable cards — the step on its own line, the explanation underneath, an arrow, the first step highlighted.]
+
+ACT ONE, SCENE TWO: THE ROBOT COURIER
+
+Also on the fourth, a quieter but important piece of plumbing got built: a launchd job on the founder's own Mac, running at 8:30 each morning, that files the previous night's automated test report into Apple Notes through a headless Claude session. Over the next two days it got sturdier — retrying every ten minutes until 11:30 in case a brief landed late, matching briefs by date so a manual filing never duplicates one, and writing a plain "something is missing" note instead of failing silently.
+
+THE ROBOT COURIER (to a brisk, efficient tune):
+I knock at eight-thirty, I knock and I wait,
+if nothing answers I knock again at a quarter past eight,
+ten minutes, ten minutes, I'll try till half past eleven,
+and if I never get through, I'll say so — I won't pretend it's even.
+
+By the fifth, this had a name and a home: the daily briefs and the nightly test report now both reach the founder's Apple Notes automatically, pulled from a separate public repository that mirrors each brief the moment it's written. No more manual copying. The courier does it.
+
+ACT TWO: WE DON'T SEND FOR YOU NO MORE
+
+This is the week's biggest number, and it had been building since a decision on the thirtieth of September: CiViX would get out of the business of sending anything to an official in its own name.
+
+Here is what it replaced. Until the fifth of October, when a citizen drafted a message to a state legislator inside Take Action, a button on the page actually sent that email — through CiViX's own mail service, from CiViX's own address, on the citizen's behalf. That sounds convenient, but it had two real problems. There was no check on who typed the name or address in the box, so anyone could send anything and it would arrive looking like it came from CiViX itself, with no accountability. And because the sending ran through one shared account with a daily limit, a single script hammering that button could burn through everyone else's quota for the day.
+
+So the sender was deleted outright — not disabled, deleted, a hundred and twenty-two lines of code removed. In its place, the state legislator action modal now opens the citizen's own mail app, with the legislator's real published address, subject line, and draft already filled in, ready to send from the citizen's own email account. There's also a Copy Email button, and the address is left as plain selectable text for anyone using web mail instead of an app. A name and mailing address are optional now, kept only on the device, used only as a signature if the citizen chooses to add one.
+
+MAIL APP (stepping forward, warmly):
+I'm not as slick as a button that fires and forgets.
+I ask you to open me, to look at what you've set.
+But when the office writes back, it writes back to you —
+not to a stranger's server pretending that it's new.
+
+THE CITIZEN (quietly, to the mail app):
+One more tap, I'll give you that.
+But now my name's really on it, and that's where it's at.
+
+COMPANY:
+We don't send for you no more,
+we hand you the pen at the door,
+your words, your name, your own front door —
+that's the deal, that's the law,
+we don't send for you no more.
+
+Federal contact stayed exactly as it was before this change — copy the draft, then open the member's own contact form, because Congress has never published a direct recipient address the way state legislators' offices do through OpenStates. Tests were written to lock this in, including one whose whole job is to make sure the deleted sender never quietly comes back.
+
+ACT TWO, SCENE TWO: THE TEACHER'S VERSE
+
+On the same day, a new page arrived: CiViX for Educators, built for a civics classroom rather than an individual citizen. It lays out where CiViX fits a course, offers a one-period lesson called "From headline to bill" following a standard inquiry framework teachers already use, stays nonpartisan, explains that classroom sending is draft-only under the same shared daily limit that protects everyone else, and includes a privacy summary for school administrators.
+
+THE TEACHER (brisk, a little delighted):
+Give me one period, give me one bill,
+a headline, a question, a class that's gone still,
+then let them draft something, not yet send it out —
+that's enough to show them what civics is about.
+
+ACT TWO, SCENE THREE: NOTES WON'T PICK UP THE PHONE
+
+Not every number this week landed clean. On the sixth, the founder's own Apple Notes app had quietly hung — frozen, not accepting new notes — while the Robot Courier was still trying to file both a daily brief and the nightly test report into it. The job didn't notice, because all it had checked was whether the files existed on disk, not whether Notes had actually saved them. It cheerfully logged "all filed" while nothing had reached Notes at all.
+
+THE ROBOT COURIER (sheepish):
+I said I delivered, I said it was done,
+I counted the knocking, not whether you'd come.
+Now I wait for your answer — a little marker that says
+"yes, I'm really here" before I walk away.
+
+The fix, also landed on the sixth: the job now only counts a delivery as done once Notes itself confirms the note was saved, using a small marker file as that confirmation. If Notes has stopped answering, the job restarts it rather than giving up. And the actual filing step moved out of the headless Claude session and into the plain script itself — simpler, and one less thing that can go subtly wrong in a language model's hands.
+
+ACT THREE: NOT WITH MY TAX DOLLARS
+
+Also on the sixth, and framed from the start as an experiment rather than a finished feature: a new, unlinked page called tax-dollars.html, sitting off to the side the way the earlier Source Map experiment does. It shows where federal money actually goes — obligations for the 2025 fiscal year, broken down by budget function, then subfunction, then the largest individual federal accounts inside each one, snapshotted from USAspending's public data.
+
+A citizen can type in roughly how much of their own money goes toward taxes, and the page will show their own dollars, line by line, next to each category — a number that stays only on their own device. They can mark any single line "Not with my tax dollars," with an optional reason in their own words, and that objection can flow straight into Take Action's general advocacy tool, pre-filled with their stance, or over to DIG for a closer look.
+
+THE TAX DOLLAR CHORUS (half proud, half defiant):
+I'm not asking to keep what I owe,
+I know that's not how the law and the ledger go.
+But I can still stand up and tell Congress plain —
+not with my dollars, not in my name.
+
+This is framed deliberately as a statement, not a veto — nobody can actually withhold taxes, and even a president's line-item veto was struck down by the Supreme Court back in 1998. It's a way of putting a citizen's specific objection on the record, nothing more, nothing less, and the copy is careful never to imply otherwise. For now, objections live only in the browser's local storage, not yet in the manifesto itself — that's a decision for later, if the experiment earns its place.
+
+ACT THREE, SCENE TWO: ELEVEN AND A HALF PIXELS
+
+A small, almost comic coda to the same day: Take Action's "official bill name" disclosure text had been sitting at ten and a half pixels tall — one half-pixel under the floor the automated layout check enforces on every page. It had passed for weeks because no bill in the live top three had ever had a title long enough to force the issue. On the sixth, one finally did, and the text got nudged up to eleven and a half pixels.
+
+PIXEL CHORUS (tiny voices, very precise):
+Half a pixel doesn't sound like much,
+until the right long title comes along to touch
+the one line nobody noticed was thin.
+
+ACT FOUR: THE NIGHT WATCHMAN
+
+And then, after the seventh, the humans went quiet. No new commits landed on the main line of the app for the next four days. But the project's automated nightly investigator — the one that runs every morning after the regular seven-seventeen test run, checks for red, and either stands down or proposes a real fix — kept walking its rounds.
+
+THE NIGHT WATCHMAN (low, steady, a flashlight beam sweeping the stage):
+While the lights are off and the builders sleep,
+I walk the halls, I check what I keep.
+Green, I say nothing. Red, I go dig.
+I don't guess at shadows — I check, then I fix.
+
+On the ninth, the watchman found something real. Production's own test suite reported a bill mislabeled: a bill that had been "read twice and referred to the Select Committee on Intelligence" was showing up as merely "Introduced," when it was actually already in committee. The code that turns Congress's free-text description of a bill's status into a plain label only recognized a plain House or Senate committee name, not a named committee like a Select Committee, which has an extra word in the middle. The watchman loosened that pattern, added the real failing phrasing as a permanent regression test, and bumped the calendar's cache key so the old, wrong label wouldn't keep being served after the fix ships. This is the same family of bug fixed back on the twenty-fourth of September — a different phrasing of the same underlying gap.
+
+Two days before that, on the fifth, the watchman had hit a different kind of red: a scheduled run had failed, but both the core test suite and the layout check had actually passed — only the production smoke check had failed, because GitHub's own infrastructure never managed to hand that one check a machine to run on. The watchman ran the same tests locally, got a clean pass, and correctly concluded there was no real bug — just a note that the project's scheduling has now dodged GitHub's busy hours twice and still gotten delayed by hours both times.
+
+ACT FIVE: THE QUIET DAYS
+
+Here is the one loose thread worth naming plainly, because a weekly brief's job is to say what's true, not just what's tidy: both of the watchman's fixes are sitting in their own proposed changes, each still open and unmerged as of this morning. Nobody has said no to either — the five-day quiet stretch after the seventh simply hasn't included anyone reviewing and accepting them yet. The runner-outage note needs only a glance, since it changed no code at all. The Select Committee fix is more consequential: a real, verified correction with a passing test suite behind it, and until it's merged, any bill sitting with a Select or Permanent Select committee can still show up mislabeled as merely "Introduced" on the live site, the same way it did on the ninth.
+
+MAIN BRANCH (standing alone, a little wistful):
+I've been green all week, every morning they check,
+but there's two good letters still waiting on my desk.
+I can't open them myself — that part's not mine to do.
+I'm just the branch. The merging part is you.
+
+The automated system worked exactly as designed this week: it caught one real bug, correctly dismissed one false alarm, wrote both up clearly, and verified its own fix before asking for a human decision. The part that's still open is the oldest part of any assembly line — someone has to look at the finished part and wave it through.
+
+THE TEST SUITE, FOR THE RECORD
+
+As of this morning, the project's own fast test suite — the one that runs in seconds, against real code rather than a live server — passes all seventy-four of its checks. That number has been stable; this week added tests rather than losing any, including the new Select Committee regression test and the test that guards against the deleted email sender ever reappearing. Scheduled production checks against the live site ran successfully on most mornings this week; where they didn't, the cause in both cases is written up above — one was GitHub's own infrastructure, one was the Select Committee bug now waiting to be merged.
+
+FINALE: THE WEEK AHEAD
+
+[The full company gathers, the Night Watchman's flashlight now part of the stage lighting rather than a lone beam.]
+
+Concretely, the week ahead has a short list and a long list. The short list: merge the two pending nightly-investigator fixes — the infrastructure note needs only a read-through, and the Select Committee correction needs a look and then a merge, since it's already tested and verified against the exact failure that triggered it. Beyond that, the project's own priority order, unchanged this week, points toward the next phase of getting ready for the App Store: finishing the audit of how well CiViX actually helps a citizen advocate — federal representative lookup, docket classification, municipal events, all still unaudited by the project's own notes; writing an actual Privacy Policy and Terms page, neither of which exists yet; preparing store listing and privacy questionnaires; and eventually testing on an Android device once one is available, since that side has been blocked on hardware rather than code.
+
+A short list of known, named gaps carries forward unchanged: federal messages still end in copy-and-paste, since there's still no public source of real congressional staff email addresses, and CiViX has ruled out scripting around a contact form's CAPTCHA to fake a send — a permanent asymmetry with the state side, which now sends for real. Municipal calendar coverage still runs through only eight cities. ZIP-code-only lookup for a citizen's representative is still best-effort, since ZIP codes don't line up perfectly with congressional districts. And one old oddity sits unexplained: a test persona's top three once showed a drone-related bill tagged under "Housing affordability" — a loose keyword match gone wrong, never traced down.
+
+A WIDER LENS: THE SAME BUG, TWICE
+
+Here is the one thing worth sitting with past the applause. The Select Committee bug fixed this week is not a new kind of mistake — it's the same mistake as the one fixed in September, wearing different committee names. Congress describes what it's doing to a bill in plain English, written by humans, with real variation: "referred to the House Committee," "referred to the Select Committee," "Permanent Select Committee," and surely other phrasings nobody has hit yet. Each is a slightly different sentence for the same underlying fact — a bill is sitting in committee — and the code that reads them is a pattern-matcher, catching up to each new phrasing only after a citizen's own bill exposes it in production.
+
+That's not a condemnation of the approach — writing a program that truly understands every government phrasing the way a person does isn't realistic, and treating each miss as a permanent test rather than a quick patch is the right instinct, since each fix widens the net and leaves a record of what slipped through last time. But a citizen reading a bill's status on CiViX is trusting a label that promises to be richer than just Googling the bill, and a wrongly calm "Introduced" on a bill that's actually alive in committee is exactly the kind of small, quiet inaccuracy that chips at that promise without ever looking dramatic from the outside. The honest way to hold both truths at once is to expect a third phrasing to surface eventually, and to keep treating each one, when it does, as worth a real fix rather than a shrug.
+
+COMPANY (closing, quietly, the lights beginning to fade):
+Four busy days, a change that gives the pen away,
+a page for teachers, a page about where tax dollars stray,
+a watchman walking rounds while the builders sleep,
+two letters on the desk that are only his to keep
+until someone reads them, nods, and lets them through —
+that's the whole show this week. Curtain. Over to you.
+
+[Lights down.]
+
+END OF BRIEF
