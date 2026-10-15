@@ -1,0 +1,39 @@
+CIVIX DAILY BRIEF, OCTOBER 15. AN EVENING NEWS BROADCAST WITH ANCHOR AND FIELD REPORTERS.
+
+A NOTE BEFORE WE GO LIVE
+
+Tonight's broadcast is a bit of theater: there is no real anchor desk and no real field reporters, just an invented frame for the walk. Every fact inside it is real, pulled from the project's code history and its overnight test logs.
+
+ANCHOR: Good evening. Top story tonight: the backlog of fixes waiting for a human signature at CiViX has tripled since yesterday. We go now to three correspondents covering three different corners of the story. First, to the code desk, where, frankly, not much has happened.
+
+CODE DESK CORRESPONDENT: That is exactly right. Nothing new has shipped into CiViX's live code since the evening of October sixth, when a developer enlarged some fine print on the Take Action screen, the full official name of a bill, so it would be readable on a phone. Nine days now, and the main version of the app has not moved. That is not itself bad news; CiViX is a one-person project, often worked from a boat, and a quiet stretch in the code is sometimes just a quiet stretch. But it means tonight's real story is not in what changed, it is in what has been building up, unattended, behind the scenes. Back to you.
+
+ANCHOR: Thank you. Now to our correspondent embedded with what CiViX calls its nightly investigator, a piece of automation that runs every morning right after the regular test check, hunting for anything that came back red.
+
+INVESTIGATOR DESK CORRESPONDENT: It had something to hunt for. Yesterday afternoon's automated test run, which checks the live site itself rather than a rehearsal copy, came back with one failure. A real bill in Congress, House Resolution 2433, had just been the subject of an unusual procedural request: a member asked to be listed as the bill's first sponsor instead of its original author, purely a paperwork change, nothing to do with the bill advancing. Buried in the plain-English description of that request was the phrase "agreed to without objection," and that was the trap. CiViX's test, watching for bills stuck showing the wrong status, had a rule of thumb that treated any appearance of "agreed to" as a sign a bill had moved forward. It had not. The bill was still at its earliest stage, exactly where CiViX's main code correctly said it was. The test was the one jumping to conclusions.
+
+ANCHOR: So the site was right, and the alarm was wrong.
+
+INVESTIGATOR DESK CORRESPONDENT: Correct, and the investigator worked that out on its own overnight. It traced the false alarm, narrowed that rule of thumb so it only fires on phrasing that genuinely means a bill passed a chamber, kept the test's broader net in place for mistakes that are real, and wrote a permanent, offline check so this exact false alarm cannot fool anyone again. Worth saying plainly: this was a flaw in the test itself, not something a citizen using the real app would ever have seen. By sunrise it had written the fix up and proposed it, for a person to approve, rather than pushing it in on its own authority.
+
+ANCHOR: And that brings us to tonight's actual headline. Over to our correspondent watching the queue of proposals waiting on approval.
+
+QUEUE CORRESPONDENT: This is where it gets uncomfortable. Before last night, there was one such proposal sitting: a genuine fix for bills stuck at the wrong status when they are sent to a committee with its own name, like a Select Committee, filed five days ago. As of tonight, there are three. The test-heuristic fix is the newest arrival. And the oldest one, a short historical note about a GitHub outage back on October sixth, has aged badly while it waited: it no longer merges cleanly. The project's own code has moved past it just enough that GitHub now flags it as needing to be reconciled by hand before it can go in. The five-day-old committee fix, by contrast, is still clean and ready, with nothing in its way but a person's attention.
+
+ANCHOR: So the fix that would make bill statuses more accurate for real citizens has now been sitting, ready and waiting, for five full days.
+
+QUEUE CORRESPONDENT: Five days, and counting as of tonight.
+
+ANCHOR: Let's talk about why that matters, beyond the paperwork. CiViX's whole promise to a citizen is that it keeps real track of where things stand so the citizen does not have to chase it themselves, richer than just searching a bill's name on a search engine. A citizen who cares about something caught up with a Select Committee opens Take Action tonight and still sees "introduced," the earliest, least informative label there is, when the bill has actually moved. Nothing crashes. No one's information is at risk. But it is exactly the small, quiet kind of wrongness that chips away at that promise, the kind nobody would think to double-check, which is precisely why CiViX is supposed to be the one checking it for them. The good news, underlined twice tonight, is that the automated side of this system is doing its job well. It caught this itself, against the real production site, before a single citizen saw it. The only step still missing, three times over now, is a person reading finished, already-tested work and typing yes.
+
+ANCHOR: So what happens next, most likely?
+
+CODE DESK CORRESPONDENT: The honest answer is that it depends entirely on whether that backlog gets cleared, or whether it keeps growing until the oldest proposals stop merging cleanly at all, the way the first one already has. Past that housekeeping, the project's own priority list has not changed: the biggest open piece is a closer audit of CiViX's advocacy side, how it looks up federal representatives, how it classifies things citizens send in, how it handles municipal government events, none of which have had a close pass yet. There is still no privacy policy or terms of service page anywhere on the site, and the app stores will not look at a submission without them. And testing on an actual Android phone is still stuck waiting for an actual Android phone.
+
+ANCHOR: And finally, something to sit with on tonight's walk, before we go to weather, which, since this is one listener on foot, we do not actually have.
+
+Three times now, over three different weeks, CiViX's own automation has done the hard, patient work: finding the real bug, proving it with a test, writing up exactly what changed and why, then simply waiting. The only step it cannot do for itself is the one that always needed a person: saying yes. Tonight that queue is three deep, and the oldest member of it has started to rot a little from waiting too long. If the automation keeps doing its half this well, is the standing risk to CiViX a coding risk at all anymore, or has it quietly become a calendar risk, a question of whether ten minutes gets set aside most mornings before good, already-tested work goes stale on the shelf.
+
+ANCHOR: That is tonight's broadcast. Good night, and good luck out there on the water.
+
+END OF BRIEF
