@@ -1,0 +1,31 @@
+CIVIX DAILY BRIEF, OCTOBER 25. AN ORAL HISTORY.
+
+A NOTE BEFORE WE BEGIN
+
+Today's brief is told as an oral history: several voices giving their account of the same short stretch of time, from different angles, the way a historian might gather testimony. None of these speakers are real people. They are invented stand-ins so the same facts can be heard from more than one side. Every fact any of them states is drawn straight from the project's commit history, its open pull requests, and its test results. Where a voice is speculating or feeling something, that will be obvious from context, never mistaken for a report.
+
+WHAT ACTUALLY HAPPENED, PLAINLY, FIRST
+
+Very little, for the second morning in a row. No new code has reached the project's main branch since October sixth. That is nineteen days now. The automated nightly check ran again yesterday and came back clean, the fourth clean run in a row, after a short rough patch on the nineteenth and twentieth that turned out not to be CiViX's fault either time. Nothing about the small pile of unmerged, already-tested fixes changed overnight. So once again, there is more to learn by looking closely at what is sitting still than by waiting on something new.
+
+THE NIGHTLY CHECK:
+
+I ran at a quarter past seven Eastern, same as every morning, though I often run some hours late. That is just how the free queue of borrowed computers behaves some mornings, nothing anyone here did wrong. Four mornings running now I have come back and said everything still works: the status shown for every bill is correct, the layout still fits on every size of phone, the live site answers every question I throw at it. Before that, I came back red twice, on the nineteenth and the twentieth. Neither time was it a mistake a citizen would have seen. One was a quota running low on the free news service that stocks the headline deck. The other was my own test being too suspicious of an ordinary piece of legislative paperwork, a routine committee referral that reads strangely only because the committee itself has an unusual name. I wrote both of those up and moved on.
+
+THE FIVE WAITING FIXES:
+
+There are five of us now, sitting as proposed changes, each one a finding from one of the nightly check's investigations, each one already tested, and none of us looked at by a human yet. The oldest of us is nineteen days old. But we are not alike, and it is worth saying so plainly, because lumping us together makes the pile look more dangerous than it is. Two of us, the oldest one and the one from the twentieth, contain no code at all. We are only write-ups: here is what went wrong, here is why it was not a real bug, nothing to merge, nothing to risk. Two more of us, from the fifteenth and the newest from the twenty-first, only change the nightly check's own test, making it less quick to suspect ordinary procedural language in a bill's history. Low stakes, narrow effect. But one of us, from the tenth, is different in kind. It is a real, live mistake in the code that decides what a citizen is told about how far a bill has moved. A bill sent to a committee with an unusual name, a Select Committee for instance, was being quietly told to citizens as merely introduced, when in fact it had moved further along than that. That fix has been sitting ready, already proven to work, for fifteen days, while a citizen checking that particular kind of bill has likely been getting a quietly wrong answer the entire time.
+
+A CITIZEN, IMAGINED:
+
+I do not know any of this is happening. I open the app, I look at where a bill stands, and I trust the number I am given. If my bill happens to have gone to one of the more oddly named committees in Congress, right now I would be told it has merely been introduced, when it has actually moved along further than that. I would not know to ask a second question. That is the quiet cost of a gap like this. Nobody decided to mislead me. Nobody's hands reached in yet to close it, that is all.
+
+WHAT'S MOST LIKELY NEXT
+
+Nothing about the project's written plan changed overnight, so the paths ahead are the same ones already on the list. There is the larger audit still waiting before the app can reach the store, covering how well it finds a citizen's elected representatives, sorts what is actually moving on a docket, and tracks city council meetings. There is the privacy policy and the terms of service, pages that still do not exist anywhere in the project. Closer at hand, and far smaller, is simply opening the box of five. Two of them cost nothing to close outright, since there is no code in them to review. Two more are narrow test improvements. One, the Select Committee fix, is overdue in a way that actually touches what a citizen sees and believes about their own bill.
+
+A THOUGHT TO CARRY ON THE WALK
+
+Yesterday's reflection asked about the gap between two sensible rules: one that lets a small human fix go out the door without a conversation first, and another that makes every automated fix wait in a box no matter how small it is. Today's thought is narrower, and more useful to actually do something with. Not every item sitting in that box is the same size, even though they have all been waiting the same way. Two of the five proposed changes are pure paperwork, with no code in them to risk at all. Closing those costs nothing and shrinks the pile by nearly half, this morning, before the walk is even over. The harder, real decision, whether to trust and merge the one fix that actually changes what a citizen is told about their own bill, becomes a smaller and clearer question once the paperwork has been cleared out of its way. Worth turning over, on the walk: how often does a backlog look more frightening, all lumped together, than any one piece of it actually is, simply because nobody has yet taken the two minutes to sort the parts that matter from the parts that do not.
+
+That is the account for this morning. More tomorrow.
