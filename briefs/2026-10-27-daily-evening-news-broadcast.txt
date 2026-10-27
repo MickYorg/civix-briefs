@@ -1,0 +1,43 @@
+CIVIX DAILY BRIEF, OCTOBER TWENTY-SEVENTH. AN EVENING NEWS BROADCAST.
+
+A NOTE BEFORE THE BROADCAST
+
+Tonight's brief is told as a television news broadcast, with an anchor and two field reporters. The newsroom, the anchor's name, and the reporters are invented, a frame for telling a true story. Every date, every number, every fact about the project is real, drawn straight from the project's own commit history, its pull requests, and its test records. Nothing about the code or the test results is made up.
+
+THE ANCHOR
+
+GOOD EVENING. I'm your anchor, and this is the CiViX nightly report. Tonight's top story is also, honestly, tonight's whole story: the quietest stretch the project has had in weeks. No new code reached the live site in the last day and a half. The automatic overnight check that runs every night at seven seventeen eastern came back clean again, as it has for six nights running now. We go now to our newsroom, where two reporters have been digging into what that quiet actually means. First, to the repository desk.
+
+FIELD REPORT: THE SILENT REPOSITORY
+
+REPORTER ONE: Thanks, anchor. I've been watching the project's commit history, the record of every change that actually reaches citizens, and tonight there's nothing new there. The last line of code that changed the live site went in on October sixth and seventh, nearly three weeks ago. Since then, every night, an automated routine has run three layers of checks against the real production site: fast internal tests, a check of every page at phone screen sizes for sideways scrolling or unreadable text, and a live check against the working app with real government data. Tonight, as for six nights running, all three came back green. Nothing broken, nothing changed. Back to you.
+
+THE ANCHOR
+
+A quiet repository. But you've also been looking at something that isn't quiet at all. What did you find?
+
+FIELD REPORT: THE UNOPENED MAIL
+
+REPORTER TWO: That's right. While the live code has sat still, the automated night watch has not been idle. Over the past three weeks, five separate nights, it found something during a failed overnight check, investigated on its own, and wrote up a proposed fix. All five of those proposals are still sitting unopened tonight, exactly where they were yesterday. I'll run through what's in that mailbag, because one of them matters to real citizens right now.
+
+The oldest, October sixth, traced a single bad test run to a GitHub infrastructure outage, not a CiViX bug. The next, October tenth, matters most: it found that any bill referred to a committee with its own name, like a Select Committee, was falling through the cracks and getting labeled simply "Introduced," when it had actually moved into committee review. That's not cosmetic. That's the wrong answer to the one question CiViX exists to answer honestly: where does this bill stand. The fix has been written, tested, and waiting seventeen days.
+
+Three more followed. October fifteenth fixed a false alarm in the live check's own judgment, not in what citizens see. October nineteenth traced an empty batch of pre-digested news cards to a free news service's hundred-request daily quota running dry, not to anything CiViX did wrong. October twentieth fixed a second false alarm, over a bill where Congress was simply reassigning who gets credit as a sponsor. None of the five have touched the main site. Every one is still open, waiting on a human decision. Back to you, anchor.
+
+THE ANCHOR
+
+A real accuracy gap sitting unmerged for over two weeks, even while the system watching for it is doing exactly what it's supposed to do. Let's talk about what that means and what's ahead.
+
+WHAT IT MEANS FOR A CITIZEN
+
+Here is the plain version, away from the newsroom voices. If a citizen opened CiViX right now and looked up a bill that has been referred to a Select Committee, the app would tell them it is merely "Introduced." The truer answer, already written and tested and sitting in a proposal nobody has looked at yet, is that it has moved into committee review. That is a small gap in one status label, but it is exactly the kind of gap CiViX promises to close. The whole point of the project is to be richer than a quick search, to actually get the standing of a bill right instead of leaving a citizen with a vague headline. Right now, on this one point, for however many bills happen to be sitting in a named committee today, the app is not living up to that promise, and it has not been for over two weeks.
+
+To be fair to the system itself: nothing here is sloppy. An automated routine found a real problem, reasoned through it carefully, wrote a fix, added a test so it cannot quietly break again, and then did the responsible thing by stopping and waiting for a person, rather than pushing a change to the live site on its own authority. That restraint is by design and it is working as designed. What's missing is only the next step, the one only a person can take: opening the five proposals, reading them, and deciding what to bring in.
+
+WHAT'S LIKELY NEXT
+
+Looking at the project's own list of open work, a few things sit close at hand. The backlog itself is the most pressing, since at least one of the five fixes is a real, live inaccuracy rather than a nicety. Beyond that, the project's audit of its "advocating effectively" half is still open: how the app finds a citizen's federal representatives, how it classifies bills and local dockets, and the municipal events feed, none of which have had a careful look yet. Two pages that don't exist at all yet, a privacy policy and a terms of service, are needed before any app store submission can happen, and a quiet stretch like this one is a natural time to write them, since that's careful work rather than urgent firefighting. And a small housekeeping question remains open too: the daily spending cap on CiViX's AI features is still twenty dollars a day, left over from before the per-visitor limit beneath it was raised to one hundred requests, and nobody has revisited whether that ceiling still makes sense.
+
+THE ANCHOR, SIGNING OFF
+
+So here's a thought for the walk tonight. A system that finds its own mistakes and writes its own fixes is a genuinely useful thing to have watching over a civic app. But finding a fix and a citizen actually benefiting from it are two different events, and only the second one counts. Tonight the gap between those two events is seventeen days and counting, on a question about what a bill's actual status is, which is about as close to the center of what this app is for as a bug can get. The honest question isn't whether the watch is doing its job. It clearly is. It's whether there's a standing habit yet for opening the mail it leaves behind, on some rhythm regular enough that a good catch doesn't just sit in a drawer. That's all for tonight. Good night.
