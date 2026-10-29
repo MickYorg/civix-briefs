@@ -1,0 +1,55 @@
+CIVIX DAILY BRIEF, OCTOBER 29. SPORTS PLAY-BY-PLAY.
+
+A NOTE BEFORE YOU LISTEN
+
+What follows is a broadcast booth that never existed, calling a game that isn't really a game. There's no real announcer and no real analyst. But everything they describe, every date, every file, every pull request, every test result, is real and comes straight from the project's commit history and its automated test runs. Only the booth is invented.
+
+PREGAME
+
+ANNOUNCER: Good morning, folks, welcome back to the booth. Quiet stretch of the season here for CiViX, the civic engagement platform that helps a citizen build what it calls a manifesto, never a profile, of what they care about, and matches it against the actual government calendar. One play ran in the last day and a half, but there's a bench situation building for weeks we need to talk about too.
+
+THE ONE PLAY THAT RAN
+
+ANNOUNCER: Last night, 16 minutes before five Eastern, the founder himself steps onto the field, straight push to the main line of code. The target: DIG, the part of CiViX that checks where different news and advocacy sources stand on a bill and shows a citizen both sides.
+
+ANALYST: DIG caches its answers for twenty-four hours, so it doesn't re-ask its research tool every time somebody looks at the same bill. But a cached answer used to show only the clock time it was first checked, something like two fourteen P.M. On its own, that number can't tell you whether it's from this morning or yesterday. Open DIG at nine A.M., see "two fourteen P.M.," and your brain reads that as later today, which makes no sense.
+
+ANNOUNCER: So the fix: cached cards now say how old the answer actually is. "Saved five hours ago." Plain English, no math required. A dozen lines in the page itself, with a new test added alongside it, so if this ever breaks again, the test catches it before it ships.
+
+ANALYST: That's the whole box score for the period. One play, well executed, tested on the way out. Both check-ins since then came back green, the run right after the push and last night's regularly scheduled nightly run, each clearing all three marks: the plain unit tests, the live check against the real production site, and the phone-layout check across every screen size CiViX supports.
+
+ANNOUNCER: Clean. Nothing broken, nothing at risk from last night's work specifically.
+
+THE BENCH REPORT
+
+ANALYST: Now here's where I have to be the analyst who brings bad news to a good broadcast. There's a second team on this field, folks, and it's been playing the whole time without anybody from the sideline waving it in.
+
+ANNOUNCER: You're talking about the nightly investigator.
+
+ANALYST: I am. An automated routine CiViX built for itself back in September. Every night, right after the seven seventeen Eastern test run finishes, it checks the results. All green, it stands down. But if something failed, it finds out why, writes an actual fix, proves the fix with a test, and opens a pull request, a formal proposal sitting off on its own branch, waiting for a human to wave it onto the field.
+
+ANNOUNCER: And how many of those are on the bench right now?
+
+ANALYST: Six. Oldest first: October sixth, a failure that turned out to be a GitHub outage, not CiViX's own fault. October tenth, a real bug, named committees like the Select Committee on Intelligence were showing bills as simply "introduced" when they'd actually been read and referred, because the word "select" broke the pattern CiViX uses to read the government's own status text. October fifteenth, a false alarm over routine procedural language. October twentieth, missing headlines traced to the outside news service, not CiViX's code. October twenty-first, another false alarm. And yesterday morning, a crash in the tool that checks how CiViX's own pages look on a phone screen, nothing a citizen would ever see.
+
+ANNOUNCER: Of those six, how many actually touch what a citizen sees?
+
+ANALYST: One for certain, the October tenth committee-status bug. Right now, a citizen looking at a bill in front of the Select Committee on Intelligence or a similar named committee sees "introduced" when the honest answer is "already referred." Small, but exactly the kind of thing CiViX promises to get right, and the fix has been sitting, tested and ready, since the tenth. Nineteen days, as of this morning.
+
+ANNOUNCER: Worth saying plainly: this same backlog got flagged in yesterday's brief too, in a different costume. One day later, it's the same six, unchanged, plus a seventh thing the investigator found and reported in again today.
+
+ANALYST: Which is the system working as designed. It doesn't touch the main line of code on its own, on purpose, because an automated routine shipping its own fixes to a live civic platform with no human checking is a real risk. The tradeoff is exactly what we're watching: correctness sitting in a drawer until a person opens it.
+
+LOOKING AHEAD
+
+ANNOUNCER: So what's next on the schedule? CiViX's own working notes point toward getting the app into the App Store: finishing the audit of how well it actually helps a citizen take action, the lookup that finds a citizen's representatives, how it classifies a legislative docket, municipal meeting data, none of which has had a full look yet. Also still needed, an actual privacy policy and terms of service, neither of which exist as pages today, plus the paperwork any app store wants before listing an app at all.
+
+ANALYST: None of that happened in this period, and that's fine, it's a quiet stretch. The real story today isn't a new play. It's that the pile of ready, tested fixes on the sideline is six deep and nobody's walked over to look at it yet.
+
+CLOSING THOUGHT
+
+ANNOUNCER: Here's something to sit with on the walk. CiViX built itself a teammate that can diagnose its own mistakes and write a tested fix for them overnight, unasked. That's rare for a project this size. But the same design that keeps it safe, nothing ships without a person saying yes, means a known, verified, citizen-facing inaccuracy can sit for nineteen days simply because nobody's gotten to it.
+
+ANALYST: The safety rule itself is clearly right. The real question is whether there's a faster lane underneath it, for fixes this small and this proven, maybe a standing weekly quarter hour just to clear the bench, instead of waiting for the backlog to get loud enough that two briefs in a row have to say so.
+
+ANNOUNCER: That's the call from up here. We'll see you back in the booth tomorrow.
