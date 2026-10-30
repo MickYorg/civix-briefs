@@ -1,0 +1,39 @@
+CIVIX DAILY BRIEF, OCTOBER 30. A NOIR DETECTIVE STORY.
+
+A NOTE BEFORE THE CURTAIN
+
+Everything you are about to hear about the code, the tests, and the open paperwork is real, pulled straight from the project's own records. The narrator, the voice on the phone, and the atmosphere around them are invented, in the style of an old detective picture, to make the facts easier to carry on a walk. When the two could be confused, I will say so.
+
+THE CALL COMES IN
+
+The office was quiet. It usually is, these past two weeks. Nothing new had moved through the front door of the main branch since the sixteenth of October, when a small fix went in so the DIG tool, CiViX's stance-checker, would tell a citizen how old a cached answer was instead of just the time it was last looked at. Since then: nothing. No new feature, no new page, no new copy. A fortnight of silence on the main ledger, while somewhere in the back room, a machine never stopped working the same case.
+
+That machine is the nightly investigator, a routine that runs every morning after the automatic test suite, checks whether anything failed overnight, and if it did, writes up what it found, fixes it, and leaves the paperwork on the desk as a pull request, a proposed change waiting for someone to say yes. It doesn't touch the real site. It just investigates and reports.
+
+Overnight, the test suite ran at twenty-seven minutes past five in the afternoon, Eastern time, like clockwork. Two of its three checks came back clean: the offline tests, seventy-six of them, all passed; and the phone-layout check, which makes sure every page still looks right on an iPhone, passed too. But the third check, the one that quietly pokes the live, real mycivix.com site every night to make sure citizens are getting the truth, came back red.
+
+THE USUAL SUSPECT
+
+Here is what tripped the alarm. A real bill in Congress, House Resolution eleven-fourteen, had a new entry in its public record. Not a vote. Not a committee move. A member of Congress asking, and being granted, permission to be listed as the bill's first sponsor instead of the original author, a bookkeeping courtesy that happens when the original sponsor leaves office or hands off a bill. The record ends with the words "agreed to without objection," because the request itself was agreed to, not the bill.
+
+CiViX's own logic, the part that decides whether a bill is Introduced, In Committee, Passed, and so on, got this exactly right. It left the bill as Introduced, which is correct. The problem was the night watchman's own simple trip-wire, a rule of thumb that flags any "Introduced" bill whose latest entry contains the words "agreed to," on the theory that usually means the bill moved. Usually. Not this time. A true witness, mistaken for a suspect, because he used a phrase the trip-wire didn't know how to read.
+
+That distinction matters to a citizen, even if the words sound like paperwork. Knowing where a bill actually stands, not where a clumsy filter thinks it stands, is the whole promise CiViX makes: richer than just reading the bill yourself. The investigator caught its own mistake before it ever reached anyone's manifesto, which is the system working as designed.
+
+THE CASE FILE NOBODY CLOSES
+
+Here is the part worth saying slowly, on a walk, with nobody around. This is not the first time this exact suspect has walked into the station. The same sponsorship-courtesy phrasing, worded almost identically, has tripped this same alarm on the ninth of October, the fourteenth, the twentieth, and now the thirtieth. Each time, the investigator did good, careful work: it proved the real bill-status logic was innocent, tightened the trip-wire a little, wrote it up, and left a pull request on the desk.
+
+And each one of those pull requests is still sitting there. All seven of them, going back to the sixth of October, including tonight's, unmerged, unclosed, gathering dust in the same drawer. A detective who keeps solving the same case and never gets to make the arrest, because the file never reaches the captain's signature.
+
+It is not urgent in the sense of anything being broken for citizens right now; the live mislabeling itself never happened. But two things are worth a decision. First, several of those seven proposed fixes touch the very same two files, the live-site checker and its matching offline test, starting from different days' version of the code. Merging all seven in a row, one after another, may not go smoothly; some will likely need to be reconciled by hand rather than clicked through. Second, and simpler: if these nightly reports keep being this reliable, this case in particular has now been independently re-solved four times. A faster way to say "yes, merge it" for this narrow, well-verified class of fix would close files instead of letting them stack up.
+
+THE NEXT CASE ON THE BOARD
+
+With the investigator's drawer as full as it is, the bigger case file, the one marked "ship the app to the App Store," hasn't moved this week. The next piece of that file, per the project's own priority list, is an audit of the "advocating effectively" half of CiViX: whether the federal representative lookup, the categorizing of local government business, and the still-unchecked municipal events are actually solid. Behind that sit two pages that don't exist yet and are required before any store submission: a Privacy Policy and Terms of Service. Behind that, the store listing itself, and an Android test group that is waiting on a device nobody has yet.
+
+A few older open items remain on the board exactly where they were: federal messages to Congress still end at copy and paste, because there is no safe way to submit a message to a member's contact form on a citizen's behalf without a human finishing the last step by hand. Local government coverage is limited to eight cities that publish their records in a format CiViX can read. And one still-unsolved oddity from testing: a bill about an aircraft, an MQ-9 drone, once got filed under "Housing affordability" in a test citizen's results, a mismatch nobody has traced to its root cause yet. Open, not forgotten.
+
+ONE LAST QUESTION FOR THE WALK
+
+A good detective story usually ends with the guilty party led away in cuffs. This one doesn't, not yet, because the mystery was never the suspect. The sponsorship notice was innocent every single time. The real open question sitting on the desk is about process, not code: when a machine has proven four times over that it reads a case correctly, what is actually being protected by making its verified, narrow, well-tested conclusions wait in a drawer for a human signature anyway? That's worth turning over on the walk, not because the caution is wrong, but because right now the caution is the only thing left unresolved.
