@@ -1,0 +1,39 @@
+CIVIX DAILY BRIEF, NOVEMBER 5. AN ORAL HISTORY.
+
+A NOTE BEFORE WE BEGIN
+
+Today's date works out, by the rotation this brief uses, to the bedtime-story frame again — the same frame yesterday's brief used, for the same ongoing story. Repeating both the frame and the subject two mornings running seemed like the wrong call, so this one is told instead as an oral history: several voices giving their own account of the same period, one after another. Every voice below is invented. Every fact any of them states is real, drawn from the project's commit history, its GitHub pull requests, and its nightly test runs, checked again this morning.
+
+THE HISTORIAN, LOOKING BACK OVER THE RECORD
+
+THE HISTORIAN: If you asked me what changed in CiViX's code in the last day and a half, I'd tell you: nothing. Not one commit landed on the main branch of the code repository since October the sixteenth. That's nineteen days now. The last thing that shipped to citizens was a small, kind touch — DIG, the tool that checks what a bill's sources actually say, started telling people how old a saved answer is, "saved five hours ago," instead of only a clock time. Since then, the surface has been still. But I want to be careful with that word "still," because underneath it, something has been building.
+
+THE NIGHT WATCHMAN, WHO NEVER MISSED A SHIFT
+
+THE NIGHT WATCHMAN: I'm the nightly investigator — a routine, not a person, but let me speak for myself anyway. Every night, a little after seven fifteen Eastern, the project's tests run against the live site. If they're clean, I go back to sleep. If something's wrong, I find out why, write the fix, prove it with a test, and leave it as a pull request — a tested patch, waiting for a human hand to actually fold it into the real code. I have not missed a night. I want that said plainly, because what follows isn't my failure. It's what happens after I leave the note.
+
+THE TESTER, EXPLAINING THE SAME FALSE ALARM, AGAIN
+
+THE TESTER: I'm the one who actually rings the bell. Twice in the last two nights — the third of November and the fourth — I caught the exact same thing. A bill shows up from Congress with its status still saying "Introduced," but its most recent action is really a bit of paperwork where one member formally takes over as the bill's listed sponsor from another, so cosponsors can be added properly. Congress writes "agreed to without objection" at the end of that notice, and my check, built to catch bills that have quietly moved forward without the site noticing, flags that phrase as suspicious. It's not wrong to be suspicious. But this particular phrase doesn't mean what I think it means, and nobody has told me that yet in a way that sticks.
+
+THE NIGHT WATCHMAN, AGAIN, A LITTLE TIRED OF HIMSELF
+
+THE NIGHT WATCHMAN: Here's the part that's hard to say gracefully. I have now diagnosed and fixed that exact tester complaint five separate times — on the fifteenth of October, the twenty-first, the thirtieth, the third of November, and again just this morning, the fifth. Five pull requests, each one a fresh investigation, each one correctly explaining that this is routine congressional sponsorship bookkeeping and not a bill actually stuck at "Introduced." Each one sitting open. None of them merged. So when the pattern shows up again on a new bill, with a new member's name in the sentence, I don't recognize it — because the recognition never made it into the code I actually run against. I catch the same monster every time as if it were the first time, because no one ever let the first catch in the door.
+
+THE CLERK, COUNTING WHAT'S LEFT ON THE TABLE
+
+THE CLERK: Someone has to count, so I will. As of this morning there are ten pull requests open against the main CiViX repository, the oldest from October the sixth, exactly one month ago. Five of them are the sponsorship false alarm I just heard described. Two more are a different repeat: the program that checks whether every page still fits on a phone screen crashed twice, on the twenty-eighth of October and again this past week, both times because it mishandled a connection to the live site resetting midstream — the same root cause, fixed once, crashed again before that fix was ever used. The rest are smaller, one-off things: a night when a news source returned an empty batch of headlines through no fault of the code, a GitHub outage with nothing to do with CiViX at all, and one real, specific gap from October the tenth — bills sent to a Select or Permanent Select committee were quietly mislabeled "Introduced" instead of "In Committee." That one touches what a citizen actually sees, and it's been sitting fixed and unused for twenty-six days.
+
+THE CITIZEN, WHO DOESN'T KNOW ANY OF THIS IS HAPPENING
+
+THE CITIZEN: I don't read pull requests. I open the app, I check my top three, and I trust that what it tells me about a bill is true. Nothing I've described sounds, from where I'm standing, like the site lying to me today — the actual live site has been giving correct answers underneath its own alarm bells. But I'd want to know that the gap between "the watchman noticed" and "the fix actually reached me" has stretched to a month in one case, and keeps stretching in another. That's not a crisis. It's just not nothing.
+
+THE HISTORIAN, LOOKING FORWARD INSTEAD
+
+THE HISTORIAN: The project's own list of what's next hasn't moved. Ahead of it sits an audit of the half of CiViX that isn't the matching engine but the advocacy itself — whether the lookup that finds a citizen's representative is dependable, whether municipal meetings across its eight tracked cities are being read correctly. And before any of that reaches an app store, two pages that still don't exist at all: a Privacy Policy and a Terms of Service, for a project whose entire promise to a citizen is built on the words "never shared, never sold." Those words need somewhere to live besides this brief.
+
+A QUESTION FOR THE WALK
+
+So here's what's worth carrying this morning, stripped of all the invented voices. A system that notices every problem and explains every one correctly is doing something genuinely hard, and doing it well. But noticing isn't the same as fixing, if nobody ever opens the folder where the fixes are kept. Ten proposals, a month's worth, several of them the same lesson taught five times because the lesson never got to stay. The question isn't whether the watchman is good at the job. It's who's supposed to meet him at the door each morning, and whether that's been happening.
+
+Those voices were imagined. The commit dates, the pull request count, the repeated bug, and the two missing pages were not.
