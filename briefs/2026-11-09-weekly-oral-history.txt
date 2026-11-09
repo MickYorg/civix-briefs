@@ -1,0 +1,83 @@
+CIVIX WEEKLY BRIEF, WEEK OF NOVEMBER 9. AN ORAL HISTORY.
+
+A NOTE BEFORE WE START
+
+This week's brief is told as an oral history, several voices taking turns to tell one true story. The voices are imagined. Every date, number, quote from a pull request, and piece of congressional text in this brief is real, pulled straight from the project's code history and from GitHub. Where a voice is clearly a real person, that is said plainly.
+
+THE NARRATOR
+
+Here is the strange shape of this week, and really the last month. Nothing has landed on CiViX's main code branch in twenty-four days. The last change anyone merged was back on October sixteenth, a small fix to how DIG, the stance checker, shows the age of a cached result. Since then: silence, on the surface.
+
+But underneath that silence, something has been running every single night without fail, finding something wrong, writing a fix for it, and filing it away in a drawer that nobody has opened. Thirteen drawers, as of this morning. That is the story this week has to tell.
+
+VOICE ONE: THE NIGHT WATCHMAN
+
+This voice belongs to the nightly investigator, the automated routine that runs every night at seven forty-five eastern, right after the regular seven seventeen test run finishes on GitHub. Its instructions are simple and have not changed: check this morning's test results. If everything is green, stop, nothing to do. If something is red, find the real cause, write a fix, write a test that proves the fix, and open it as a pull request on its own dated branch. Never touch the main branch directly. Let a person decide whether to bring it in.
+
+NIGHT WATCHMAN: I have not missed a night. October sixth: a GitHub-side runner outage, not our fault, I wrote it down and moved on. October tenth: a committee referral with an unusual name, "Select Committee on Intelligence," slipped through our status logic because it expected plain "House" or "Senate," nothing fancier. Fixed that. October fifteenth: a procedural notice got mistaken for a bill's real status. Fixed that too, or so I thought.
+
+NARRATOR: That phrase, "or so I thought," turns out to be the heart of the week.
+
+VOICE TWO: A CONGRESSIONAL CLERK
+
+This voice is invented, a stand-in for the plain-English explanation of something real: a specific, recurring piece of congressional procedure that kept fooling CiViX's bill-status checker.
+
+CLERK: Every so often, a member of Congress whose colleague has left office, retired, or passed away will ask the chamber's unanimous consent to be considered, from now on, the "first sponsor" of that colleague's bill. It is pure paperwork. It lets new cosponsors sign on and lets the bill be reprinted under the new name. Nothing about the bill itself has moved an inch. It is still sitting wherever it was sitting before. But the sentence that records this request always ends the same way: "agreed to without objection." And if you are a simple test looking for the words "agreed to" as a sign that something happened to a bill, you will get fooled, every time, by a member reassigning sponsorship on a bill from years ago.
+
+NARRATOR: That one sentence, "agreed to without objection," on the end of routine sponsorship paperwork, is responsible for more of this week's work than anything else.
+
+VOICE ONE: THE NIGHT WATCHMAN, again
+
+NIGHT WATCHMAN: October twenty-first, I found it the first time: a bill reassigned to a new first sponsor, flagged as mislabeled, when it was labeled correctly all along. I decided it was my own test's heuristic being too blunt, not the real status logic, and I narrowed the heuristic. October thirtieth, I found the same shape of problem again, a different bill, different member. I fixed it again. November fourth. November fifth. November seventh, where I finally went back and counted: this exact shape of failure, a member reassigning first sponsorship, had now shown up on four separate mornings. I widened the actual status-detection logic that time, not just the test, so a bill caught in this paperwork would honestly read "In Committee" rather than falling back to the misleading default of "Introduced." I bumped the cache key too, the way the project's own rules say to, so old mislabeled results would not keep being served from the cache for another hour. November eighth, it happened again anyway, a different member, a different bill, same sentence. And today, the ninth, I tried something different: instead of patching the pattern-matcher one more time, I pulled the whole status-checking logic out into its own shared, independently tested piece, hoping that is sturdier ground to fix the next variation on.
+
+NARRATOR: Eight separate mornings, by one honest count, where the same underlying habit of Congress, a member quietly taking over credit for an existing bill, tripped up CiViX's status label. Eight separate pull requests addressing some version of it. And not one of those eight has reached the live site.
+
+VOICE THREE: THE FOUNDER
+
+This voice is real. These are the founder's own words, written as a comment on one of these pull requests, back on October sixth, when he went looking into why a phone-layout check had failed.
+
+FOUNDER: Layout failed on this PR's CI run, take-action-inbox and take-action-inbox-push flagged as newly too small to read on iPhone SE, 16, and 16 Pro Max. But this isn't this PR's failure, this PR only touches the history file. Update: the re-run reproduced the exact same two counts, so this isn't a flake after all. Root cause, traced through the code: both scenarios load take-action.html for a real persona, and boot always calls the calendar API to match live bill data against that persona's manifesto. That calendar result gets cached for an hour. Most likely a new, different matched bill card introduced one new small-text CSS class that wasn't present when the phone-check baseline was last captured. I don't have Chrome and network access to mycivix.com from here to see the exact element, so I'm not guessing at a CSS fix blind. For you to do by hand: open the phone-screenshots from this run, see which new element is under eleven pixels, and either fix its CSS or update the baseline deliberately once you've looked. I'm leaving the baseline untouched.
+
+NARRATOR: That note, itself more than a month old now, is still sitting there too. A small, specific, fixable thing: some bill card the live calendar matched pulled in text too small to read comfortably on a phone, and nobody has yet gone and looked at which one.
+
+VOICE FOUR: THE STACK OF LETTERS
+
+This voice is invented, giving a shape and a complaint to something very real: thirteen open pull requests, sitting on GitHub since October sixth, none of them merged, none of them closed, none of them acted on.
+
+STACK OF LETTERS: I am thirteen letters, each one addressed to the same desk, each one still sealed. Letter one, October sixth, says a test run failed because GitHub's own machines didn't show up, not our fault. Letter two, October tenth, carries a real fix for named House committees falling through the cracks. Letter three, October fifteenth, catches a procedural phrase being misread. Letter four, October twentieth, traces an empty batch of news headlines back to the news provider, not our code. Letter five, October twenty-first, the first sighting of the sponsorship-reassignment problem. Letters seven, nine, ten, eleven, twelve, and thirteen, all some version of that same sponsorship problem, each written by someone, or some thing, that could not see the six letters already written about it, because nobody had opened the drawer. Letter six and letter eight, two separate mornings, a month apart, finding the exact same crash: GitHub's own testing robots recently started running on a newer version of their operating system, and on that version, the web browser Chrome refuses to start inside the phone-layout check, so that whole check falls over partway through. Letter eleven finally fixes it properly, by telling the check to use the older, working version of that operating system until the newer one is sorted out upstream. That fix, too, is still sealed.
+
+NARRATOR: Put plainly: the automated night watchman has been doing exactly its job, finding real problems and writing real, tested fixes for them. What has not been happening is the next step, a person looking at those thirteen letters and deciding which to bring in. Each morning the watchman cannot see yesterday's unopened letter, so some of this work has been done more than once, in slightly different words, for the same underlying problem.
+
+VOICE FIVE: A CITIZEN
+
+This voice is invented, standing in for anyone who actually opens CiViX and looks at their top three.
+
+CITIZEN: I check my three things most mornings. Yesterday one of them, a bill I'm watching, said "Introduced," plain as that, like nothing had happened to it since the day someone first filed it. But if I'd gone and looked myself, I'd have found out it had already been sitting in committee for weeks, and that the only reason the listing said "Introduced" is that some lawmaker had just filed paperwork to take over credit for cosponsors, which has nothing to do with where the bill actually stands. I don't know any of that backstory. I just see a word, and I either trust it or I don't. CiViX promised me it would get to know what I care about and tell me the truth about where it stands, richer than me just Googling the bill myself. A wrong word, even a small one, spends down that trust a little.
+
+NARRATOR: That is the quiet cost of a fix sitting unmerged. Not a crash, not a security hole, nothing dramatic. Just a label that is a little less honest than it should be, for a little longer than it needed to be, because a true, tested fix for it has been sitting finished since October twenty-first.
+
+THE STATE OF THE TEST SUITE
+
+Taking stock plainly, without a voice, for a moment. The offline regression suite that runs in seconds, real code and real page logic, no network, is clean: seventy-six tests, seventy-six passing, on the main branch, right now. That part of the house is in order.
+
+The two checks that watch the live site are a different story this period. The nightly scheduled run against production failed on four of its last five completed mornings before today: November fourth, sixth, seventh, and eighth, with only November second coming back clean in that stretch. Every one of those four failures was the same sponsorship-reassignment problem described above. Separately, the phone-layout check, which opens every page on simulated iPhone screens and looks for anything too small to read or scrolling sideways, has twice crashed outright rather than failing cleanly, because of that GitHub operating-system upgrade breaking Chrome's start-up. Both problems have real, tested fixes waiting in those thirteen pull requests. Neither fix has reached the live site yet.
+
+So the honest read on the suite is: the part that runs locally, in seconds, is trustworthy and green. The part that watches the real world, congress.gov's live text and GitHub's own infrastructure, has been correctly diagnosing itself as broken, repeatedly, and just as repeatedly failing to get itself fixed, because fixing it requires a merge that has not happened.
+
+THE WEEK AHEAD
+
+The most useful thing to do with the coming week is not new code. It is clearing the drawer. Thirteen open pull requests, the oldest more than a month old, need a look and a decision, not necessarily all thirteen merged one by one. Several of them propose overlapping, slightly different patches to the exact same underlying pattern-matching rule, so bringing all of them in, in order, would likely conflict with itself. The most sensible path is probably to start from the newest, today's, which took the more durable approach of pulling the status-checking logic into its own separately tested piece, bring that one in if it looks right, and then close out the earlier, narrower sponsorship-related patches as superseded rather than merging each in turn. The separate, simpler fixes, the named-committee fix from October tenth, the procedural-text fix from October fifteenth, the GNews headline-batch note from October twentieth, and the Chrome-runner pin from November seventh, stand on their own and do not depend on each other.
+
+Beyond the drawer itself, worth five minutes: the small, specific layout question the founder flagged by hand back on October sixth and never got back to, which element in the take-action inbox is rendering under eleven pixels on a phone screen. The screenshots from that run are still sitting there waiting to be looked at.
+
+Nothing on the longer roadmap, the App Store submission work, the municipal calendar coverage, the Not-With-My-Tax-Dollars experiment, moved this period, and none of it needs to this week either. The honest priority, if the week has only a few hours to spare, is closing the loop that the automation has already done the hard part of: diagnosis and a tested fix. What is missing is just someone saying yes.
+
+ONE WIDER LENS
+
+Step back for a moment from CiViX's own code and look at the shape of what happened this month, because it says something about automated work in general, not just this project. An agent was told: watch carefully, diagnose honestly, never touch the main branch yourself, leave the decision to a person. It did exactly that, every single night, without fail, for over a month. That is, by every measure that matters, a success. The instructions were followed to the letter.
+
+And yet the result, sitting here today, is thirteen correct, tested fixes that have made no difference whatsoever to what a citizen actually sees on the live site, because the one step nobody automated, a person opening the drawer, did not happen. The same small paperwork sentence, a member reassigning sponsorship credit on an old bill, fooled the system eight separate times, not because the system couldn't learn, but because each night's fix couldn't see the night before's unmerged fix. That is not a flaw in the automation. It is a gap in the process wrapped around it.
+
+There is a small, uncomfortable echo of CiViX's own purpose in that. The whole point of this project is to close a loop for citizens: notice what matters to them, match it to what is actually happening in government, and turn that into something they can act on, rather than just information they passively hold. A manifesto that only ever notices and never acts is half a product. This month, CiViX's own development process quietly fell into exactly that same half-finished shape: noticing was automated and working beautifully, acting was left for later, and later kept not arriving. The fix is not more automation. It is almost certainly the opposite: fifteen minutes, once a week, specifically set aside to open the drawer and decide.
+
+That is the week. Quiet on the surface, busy and a little stuck underneath it, and one clear, small thing to do about it.
