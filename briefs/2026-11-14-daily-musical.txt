@@ -1,0 +1,63 @@
+CIVIX DAILY BRIEF, NOVEMBER 14. A MUSICAL.
+
+A quick word before the curtain rises. Tonight's brief is staged as a small musical. There is a narrator, a chorus playing the nightly investigator, the little program that checks the live site before dawn every day, and a character called the queue, who sings for the pull requests waiting in a row for a human to look at them. None of these are real people, and nobody actually sings in a server log. But every date, every commit, every test result, and every pull request number in this telling is pulled straight from the project's own real records.
+
+OVERTURE
+
+(The stage is dark except for one small green light, blinking steadily, like a server running quietly with nobody watching. The narrator steps forward.)
+
+NARRATOR: Twenty nine days now since the last real line of code landed on the main branch. October sixteenth was the day the cards changed, showing how old a cached result is, not just the clock time it was checked. Since then, silence on the coding side. But not silence everywhere.
+
+THE CHORUS OF THE INVESTIGATOR
+
+(A single spotlight. A steady, patient voice, built for repetition, the way a machine that runs the same check every night would sound if it could sing.)
+
+INVESTIGATOR: Every morning, before the sun, I run the numbers one by one.
+I check the bills, I check the feed, I check the site does what citizens need.
+Most nights are clean. Some nights are not.
+When something's wrong, I find the spot.
+I write the fix, I test it twice, I open a door, I don't think twice.
+But the door stays shut. The door stays shut.
+Thirty nine days, and the door stays shut.
+
+NARRATOR: That's not poetic exaggeration. The oldest of these open doors, pull request number one, was opened on October sixth. It is still sitting there today, alongside thirteen others. Fourteen pull requests, all written by the same nightly process, all tested, all waiting. None merged.
+
+SCENE TWO: THE SAME SONG AGAIN
+
+(The lights come up on a single bill, H.R. five thirty seven, standing alone at the center of the stage, holding a piece of paper.)
+
+NARRATOR: Here is why. CiViX gives every bill moving through Congress a plain label, so a citizen never has to wade through Congress's own paperwork to know where things stand: Introduced, In Committee, and so on. Most of the time this works cleanly. But every so often a member of Congress files a small housekeeping request, reassigning who officially counts as a bill's sponsor, usually so a cosponsor can be added the right way. The record of that housekeeping ends with the words, agreed to without objection, the same four words the record uses when a bill actually passes a real vote. CiViX's own status logic tells the difference correctly, every time this month. But the nightly test that double checks that logic, as a safety net, is not as careful, and keeps mistaking the housekeeping paperwork for a real vote.
+
+THE DUET OF THE SAME BUG
+
+(The investigator and a second voice, the live test, sing the same two lines back and forth, a new bill's number standing in each time: H.R. four thousand six, H.R. five thousand six fifty eight, H.R. fifteen twenty two.)
+
+LIVE TEST: I saw the words, agreed to, there, I raised the flag, I didn't care.
+INVESTIGATOR: It wasn't a vote, it was just a swap, a sponsor change, a paperwork stop.
+
+NARRATOR: That exchange is the pattern across nine of the fourteen pending fixes since October sixth: a different bill, the same housekeeping paperwork, the same false alarm, a near identical fix proposed again. It happened again on November twelfth, and the fix, pull request fourteen, went up the next morning. The night after that, November thirteenth, the run came back clean, not because any fix merged, but because that night's batch of bills happened not to include one with this paperwork. The flaw never left. It's just waiting for the next bill that carries the right boilerplate.
+
+SCENE THREE: THE QUEUE SINGS
+
+(Fourteen small lights come up across the back of the stage, one for each pull request, humming the same few notes slightly out of sync, like a chorus rehearsing the same four bars for over a month.)
+
+THE QUEUE: Fourteen of us, waiting here, the oldest one, thirty nine days a year.
+Most of us say the same small thing: leave the label as it's always been.
+But one or two among us ask a harder question outright:
+should a bill handed to committee wear a different, truer, light?
+
+NARRATOR: That's the real tension, outside the song. Most of the fourteen open fixes agree on keeping today's label, Introduced, exactly as it is. But a smaller few argue the more honest label, once a bill is formally handed to committee, is In Committee, since that's where almost every bill spends nearly all of its life. That's not a bug fix. That's a real policy choice about what CiViX tells a citizen, and it deserves someone's judgment, not the luck of which branch sits on top of the pile.
+
+WHERE THINGS STAND, PLAINLY
+
+Outside the staging, the facts for the record, sung by nobody. The last real commit to the main branch was October sixteenth, now twenty nine days ago. The nightly checks have kept running every night since, built from three layers: a fast offline regression suite, a phone layout check across every page, and a live smoke test against the real production site. The offline and layout checks have stayed clean the whole period. Only the live smoke test has failed intermittently, nine times since October sixth, every time on this same sponsor reassignment false alarm, never on a real citizen facing problem. Fourteen pull requests from the nightly investigator sit open and unmerged, from October sixth through yesterday morning, each one tested and ready, each following the house rule: fix it on its own branch, open a request, never touch the main line directly. That rule has held without exception for five and a half weeks. Nothing in the app a citizen actually opens is known to be broken. The next big piece of planned work, the App Store submission, still waits on two pages that don't yet exist, a Privacy Policy and a Terms page, plus an unfinished audit of how well CiViX handles federal, state, and municipal action on a citizen's behalf.
+
+FINALE
+
+(The lights that have been scattered across the back of the stage, one for each open pull request, slowly rise together to the same brightness, and for the first time in the piece, every voice sings the same line in unison.)
+
+ALL: Thirty nine days, and the door stays shut. Not broken. Not lost. Just shut.
+
+NARRATOR: Here's the thought for the walk. A system that checks itself faithfully every night, catches its own near misses, writes a real working fix each time, and never once breaks its own rule about staying off the main line, is exactly the kind of patient tool a citizen would want standing between them and Congress's paperwork. But a month of that same discipline, with nothing let through the door, stops being simply careful and starts becoming its own kind of quiet decision, made by default instead of on purpose. The question isn't whether the investigator is doing its job; it plainly is. The question is whether somebody needs to sit down, once, with the smaller buried question, Introduced or In Committee, decide it on purpose, and let the other thirteen doors close behind it, instead of leaving fourteen patient, well-tested fixes humming the same unfinished bars indefinitely.
+
+(The lights fade. End.)
