@@ -1,0 +1,29 @@
+CIVIX DAILY BRIEF, NOVEMBER 19. A STRAIGHT BRIEFING.
+
+Good morning. No invented voices or frame this time, just the facts, plainly, the way they sit in the project's own records this morning.
+
+WHAT'S NEW FOR CITIZENS: NOTHING, STILL
+
+The last change that actually reaches a citizen using CiViX landed on October the sixteenth, a small, good one: the stance-checking tool, DIG, started telling a citizen how old a saved answer is, "checked five hours ago," instead of just giving a clock time. That was thirty-four days ago. Nothing has reached the live app or site since. If you opened CiViX this morning, on the web or on the phone, it would behave exactly as it did a month ago. To be clear about what that is and isn't: it is not a sign of anything broken. The app that citizens actually use keeps working the same way it has, and nothing in this morning's records suggests a citizen has hit a bug. It's simply quiet, for the fourth week running.
+
+THE BACKLOG, BY THE NUMBERS
+
+Meanwhile, the project's automatic nightly check, the routine that runs every evening and looks for anything that went wrong, has not gone quiet at all. Overnight, it opened its seventeenth proposed fix. That number is worth sitting with: seventeen fixes, each one built, each one tested, each one sitting on GitHub waiting for someone to look at it and decide whether to actually bring it into the real code. Not one of the seventeen has been merged. The oldest has been waiting since October the fifth.
+
+Here's what's actually in that pile. Almost all seventeen fixes trace back to just two underlying problems, surfacing again and again in slightly different clothes. The first: when a member of Congress files a routine bit of paperwork, reassigning who counts as a bill's "first sponsor," the record on congress.gov describes it as "agreed to without objection." That phrase is also what congress.gov uses when a bill genuinely advances a stage. CiViX's own checking code keeps tripping over that coincidence, sometimes in the part that labels a bill's status for citizens, more often lately in the part that tests whether that labeling is working, because the test's check for the word "agreed" is cruder than the real labeling code already is. Each time, the specific bill and the specific lawmaker's name are different, so each fix looks like a new, distinct problem, even though it's really the same crack in the same wall. The second recurring problem is smaller and purely technical: a tool CiViX uses to check that every page fits a phone screen correctly can crash, rather than fail gracefully, when its connection to the live site drops partway through a check. Neither of these two problems has ever reached a citizen. Both are in CiViX's own testing machinery, catching things before they could.
+
+Last night's nightly run failed again, on that same recurring false alarm. The night before, Tuesday, it passed clean. Looking back over the last three weeks of nightly runs, about half have come back red, nearly always for this same reason.
+
+WHAT'S AT RISK
+
+The honest risk here isn't a citizen-facing bug. By every account in this morning's records, the live app works. The risk is the size and age of that pile of seventeen un-merged, tested fixes, and what it says about the gap between a problem being found and a problem being closed. The nightly routine is doing exactly its job: it watches every single night, writes a real, reasoned fix, and raises its hand. Nobody has been taking the hand. That's not a crisis by itself, a month without attention happens for all kinds of good reasons, but a gap like this doesn't shrink on its own, and the longer it sits, the harder any one piece of it is to untangle from the next.
+
+WHAT'S LIKELY NEXT
+
+Nothing in the record this morning points to new citizen-facing work landing today on its own. The project's own written plan says the next real milestone is getting CiViX into the app stores for real, and two concrete things stand between here and there. There is still no Privacy Policy page. There is still no Terms page. Neither exists yet, not even a draft. And nobody has yet gone back and checked whether the half of CiViX that actually fights for a citizen, not just listens to them, holds up: whether the federal representative lookup is accurate, whether the kind of local government business CiViX tags gets tagged right, whether the town-by-town meeting calendar is trustworthy the way the federal and state calendars already have been shown to be. Those three things, the two missing pages and the unfinished audit, are the real next steps, and none of them depend on first working through the pile of seventeen fixes.
+
+A THOUGHT FOR THE WALK
+
+Here's something worth turning over. The two bugs behind most of this pile aren't really bugs in the sense of something CiViX got wrong about a bill. They're a pattern-matching shortcut, code that looks for a handful of known phrases in a lawmaker's own paperwork and falls back to a default guess when it doesn't recognize one, meeting Congress's enormous variety of ways to say the same small procedural thing. Every time someone patches the latest phrasing, the patch works, narrowly, for exactly that phrasing, until the next lawmaker's clerk writes it slightly differently. Seventeen patches in, the question worth asking isn't "what's the eighteenth patch." It's whether the underlying approach, matching against a known list of phrases, was ever going to keep up with how Congress actually writes, or whether what's really needed is a sturdier way of telling "this changed the bill's status" apart from "this didn't," one that doesn't need a new patch every time someone's clerk finds a new way to say "no change here." That's a bigger question than fixing lines seventeen and eighteen. It might be the more useful thing to think about before writing a nineteenth.
+
+That's the brief for this morning. Have a good walk.
