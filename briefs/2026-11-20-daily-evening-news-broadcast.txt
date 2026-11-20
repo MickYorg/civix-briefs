@@ -1,0 +1,47 @@
+CIVIX DAILY BRIEF, NOVEMBER 20. EVENING NEWS BROADCAST.
+
+OPENING
+
+Good evening. This is a made-up newsroom with an invented anchor and an invented field reporter, built just to carry you through two real days of work on CiViX, the app that helps a citizen build a private manifesto of what they care about and turns it into action. Every fact you're about to hear is pulled straight from the project's commit log and its testing record. The voices are imaginary. The work is not.
+
+ANCHOR: Good evening. I'm at the desk tonight with one real headline and one small but satisfying fix. Let's go to our reporter in the field, who's been looking at the biggest addition to the DIG tool in weeks.
+
+FIELD REPORT: THE BIG STORY
+
+REPORTER: Thanks. For anyone who hasn't opened DIG lately, it's CiViX's stance checker. You hand it a topic, and it digs through where different sources stand on it, so you're not just trusting one headline. Until yesterday, every time you opened DIG on something you cared about, it started from scratch. Now it doesn't.
+
+The founder asked for what they called a fast track: a way to revisit something you'd already looked into, without rebuilding your whole manifesto from the beginning. What shipped is a feature called "Where it stands." For any topic you've touched, CiViX now keeps a running status: what's true now, what's the latest development, and what's likely to come next, along with up to three source links. It's built by one AI call that's told, explicitly, to stay neutral and to label itself clearly as an AI summary worth double-checking, not gospel.
+
+Here's the part that matters most. CiViX used to forget what a source said the last time you checked. Now there's a year-long memory, called a stance history, that remembers each source's position on each topic. So when you refresh, the system doesn't just hand you a fresh take, it compares the new one to the old one and tells you plainly: "same take" or "shifted since," and if it shifted, what actually changed. That's a real capability citizens have been asking for without knowing the name for it: not just "what does this source currently believe," but "did this source change its mind, and when."
+
+There's also a result that was already cached showing its age now, something like "saved five hours ago" instead of just a clock time, so you can tell whether what you're reading is this morning's answer or yesterday's. A "refresh all" button forces every source to be checked fresh, ignoring the usual one-day cache. And there's a new one-tap "Follow" on a topic, which does two things at once: it adds the topic to your manifesto, or bumps it up if it's already there, and it adds it to your watchlist on the Take Action page. Tap "stop following" and both of those are undone cleanly, nothing left behind.
+
+ANCHOR: So, a topic you dig into once doesn't just vanish into the past.
+
+REPORTER: Exactly. It becomes something CiViX can keep an eye on for you, and tell you when it's moved.
+
+FIELD REPORT: THE QUICK FIX
+
+ANCHOR: And the smaller story tonight?
+
+REPORTER: A cleanup, about five hours after the big feature shipped. When CiViX's AI model does a web search to answer "where does this source stand," it has to strip out the citation markers afterward, the little footnote-style tags that point back to the search results. Doing that left some sentences with an orphaned space right before a period or a comma. Something reading like "the bill has been stalled for weeks ." instead of "weeks." Small, but the kind of thing that makes an AI-written summary feel sloppier than it is, and sloppiness is exactly what erodes trust in a tool whose whole pitch is that it reads the room better than you could on your own. It's fixed now, with a test added so it can't quietly come back.
+
+THE SCOREBOARD
+
+ANCHOR: Let's check the scoreboard. How did testing hold up?
+
+REPORTER: The push-triggered tests, the ones that run automatically every time code goes up, came back clean on both of yesterday's changes: all the offline regression checks, and the phone-layout checks across the small, medium and large iPhone sizes. No sideways scrolling, no pages that got worse.
+
+There was one red mark, but it's worth being precise about it. The nightly run, which checks the live production site at the same time every night, failed its layout check this morning. Looking at the actual log, the failure wasn't a broken page, it was a dropped network connection partway through, the kind of hiccup that happens now and then when a script is hitting a real website over and over. The same commit, checked minutes earlier by the push-triggered run, passed without complaint. This is a known pattern on this project: nightly checks against the live site have failed and recovered on and off for weeks, almost always for this same kind of transient reason rather than an actual bug. There's a routine built specifically to look into exactly this every morning, figure out whether it's real, and fix it on its own branch if it is, so it's being watched. But as of this brief, nothing points to a real break in the app citizens are using right now.
+
+LOOKING AHEAD
+
+ANCHOR: Before we go, what's coming?
+
+REPORTER: The project's own priority list points toward finishing the app store submission. That means an honest audit of the "advocating effectively" half of CiViX that hasn't been checked yet, specifically how it looks up your federal representatives, how it classifies legislative dockets, and how municipal meeting events are handled, none of which have had the same close look as other parts recently. After that: a privacy policy and terms of service, since neither exists yet, and neither can wait for an app heading toward app store review. Beyond that sits a backlog item worth knowing about: an experimental page that lets a citizen trace exactly where their federal tax dollars go, function by function, and raise their own line-item objections in their own words, aimed eventually at turning into a message to Congress. It exists already, just not linked anywhere yet.
+
+CLOSING THOUGHT
+
+ANCHOR: Here's something to sit with on your walk. CiViX just started keeping a long memory of what sources used to say, so it can tell you when they change their mind. That's clearly useful. But it also means a plain promise, "never shared, never sold," now has to cover something new: a quiet, permanent record of positions, built on your behalf, that nobody but you will ever see. The question worth asking isn't whether that's a good feature. It plainly is. It's what else a tool like this should remember for you, and what it should let you forget, on purpose, if you ever ask it to.
+
+That's tonight's broadcast. Back to you in the morning.
