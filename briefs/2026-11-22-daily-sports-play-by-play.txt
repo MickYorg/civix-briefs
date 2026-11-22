@@ -1,0 +1,51 @@
+CIVIX DAILY BRIEF, NOVEMBER 22. SPORTS PLAY-BY-PLAY.
+
+Good morning. Before anything else: this is told as a radio broadcast, with a play-by-play announcer and a color commentator calling the action. Those two voices, and their banter, are invented for the walk. Every score, every play, every statistic underneath them is real, pulled from the project's commit history and its public testing records. Here we go.
+
+FIRST QUARTER: A QUIET FIELD
+
+ANNOUNCER: Welcome back to CiViX Stadium. Let's set the scene honestly: it's been a quiet stretch on the main line. No new code has reached the live app since November nineteenth, three days back now. That day's drive was a good one — a feature inside DIG, the part of CiViX that checks where a topic really stands across different sources, learned to remember how old its own answers are, to compare today's source positions against a full year of history and say "same take" or "shifted since," and to let a citizen follow a topic with one tap that adds it to both their manifesto, that's CiViX's word for a citizen's private profile of what they care about, and their watch list at once. Yesterday's broadcast already covered that play in detail, so today we're not re-running it. We're picking up where it left off.
+
+COLOR: And where exactly does it leave off?
+
+ANNOUNCER: With the story yesterday's broadcast flagged but couldn't fully score yet. Let's go to it.
+
+SECOND QUARTER: THE REPLAY OF THE REPLAY
+
+COLOR: Set it up for us.
+
+ANNOUNCER: Every night, CiViX runs an automated referee — the team calls it the nightly investigator. It checks the live site against the full test suite at twenty past seven Eastern. If something's broken, it doesn't touch the main line itself — that's the rule — it finds the root cause, writes a tested fix, and puts it up for review on its own practice branch. That's been running since early October.
+
+COLOR: And how's its record?
+
+ANNOUNCER: As of this morning: nineteen separate fixes proposed. Nineteen still sitting open, unreviewed, unmerged. The oldest one is forty-seven days old, from October sixth.
+
+COLOR: Nineteen and zero. That's not a slow start, that's a whole season on the bench.
+
+ANNOUNCER: And here's the play that makes it concrete, not just a number. Pull request number two, from October tenth, fixed a bug where Congress referring a bill to a Select or Permanent Select Committee — instead of a plain House or Senate one — made CiViX's own code mislabel that bill "Introduced," when it had actually moved well past that. Six weeks later, pull request number nineteen, filed just this past Saturday, fixes the exact same category of bug: a bill referred to the Select Committee on Intelligence, mislabeled "Introduced" again, same root cause, nearly the same one-line fix. Because the first fix from October was never merged in, the team's own referee had to catch the identical problem a second time.
+
+COLOR: So the system is working. The team just isn't using what it's catching.
+
+ANNOUNCER: That's exactly it. And worth saying plainly, since it's easy to read this backwards: last night's scheduled run, the one that finished at six-oh-two Eastern yesterday evening, actually came back clean. All tests passed, including the live one. But that's not because anything got fixed — the Select Committee bug is still sitting in the production code, untouched. The test happened to pass because the particular bill text that would have tripped it wasn't in that day's batch. Today's bills, tomorrow's bills, any day Congress refers something to a less common committee, the same flag can go up again.
+
+COLOR: A clean box score with the same crack still in the wall.
+
+ANNOUNCER: Right. Nineteen proposed fixes stacked up means nineteen separate, specific, already-tested improvements a human reviewer could merge in an afternoon — most of them small, single-purpose, and aimed at the same underlying weak spot: a function that tries to recognize every possible sentence Congress might write about a bill's progress, one pattern at a time, and keeps meeting new sentences it's never seen.
+
+THIRD QUARTER: THE REST OF THE SCOREBOARD
+
+ANNOUNCER: Two smaller plays round out the pile. One nightly fix addresses the live test's own screenshot tool, which crashed on a network hiccup that arrived after it had already started writing its response — a tool tripping over its own feet, not an app problem. Another, from back in October, traced an empty batch of headlines to the outside news service CiViX pulls from, not to CiViX's own code — a useful bit of detective work that cleared the team's name on that one, even though it too is sitting unmerged with the rest.
+
+COLOR: Any movement expected downfield?
+
+ANNOUNCER: Per the team's own playbook, the next real possessions are already lined up: finishing the audit of the half of CiViX that actually fights for a citizen — federal representative lookup, how different kinds of government business get classified, the municipal meeting calendar, still unchecked in full — plus writing the privacy policy and terms of service the app doesn't have yet, both required before this thing can even take the field in the app stores. And one permanent, deliberate rule worth restating: for federal officials, CiViX will always end in copy-and-paste, never an automatic send, because there's no reliable public email address for congressional staff, and this team has drawn a hard line against ever trying to sneak a message past a CAPTCHA to fake one. That's a boundary, not a bug.
+
+FOURTH QUARTER: SOMETHING TO SIT WITH
+
+ANNOUNCER: Here's the thought for the walk. A referee that catches the same foul twice, six weeks apart, isn't failing. It's doing exactly its job both times. The failure, if there is one, lives one level up: in a season with nineteen proposed, verified, ready-to-go fixes and zero decisions made about which ones to actually bring into the game.
+
+COLOR: So what's the real score?
+
+ANNOUNCER: Call it this: detection, nineteen for nineteen. Follow-through, zero for nineteen. The question worth carrying today isn't whether the team can find its own bugs — clearly it can, reliably, automatically, even while everyone's asleep. It's whether a backlog of well-tested, low-risk fixes needs its own kind of attention, maybe even its own routine, separate from finding the next one — because right now, finding has completely outpaced choosing.
+
+That's the broadcast. See you out there tomorrow.
